@@ -13,14 +13,5 @@ import { Profile } from './data/interfaces/profile.interface';
     imports: [RouterOutlet, ProfileCardComponent, JsonPipe]
 })
 export class AppComponent {
-  title = 'tik-talk';
-  profileService = inject(ProfileService)
-  profiles: Profile[] = []
-
-  constructor() {
-    this.profileService.getTestAccounts()
-    .subscribe(profiles => {
-      this.profiles = profiles
-    })
-  }
+  
 }
