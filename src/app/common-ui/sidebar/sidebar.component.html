@@ -2,13 +2,45 @@
 
 <nav>
   <ul class="main-menu-list">
-    <li>
-      <button class="menu-item">
-        <svg icon="home"></svg>
-        <span>
-          Моя страница
-        </span>
-      </button>
-    </li>
+    @for (menuItem of menuItems; track $index) {
+      <li>
+        <button class="menu-item">
+            <svg [icon]="menuItem.icon"></svg>
+            <span>
+              {{ menuItem.label }}
+            </span>
+        </button>
+      </li>
+    }
   </ul>
 </nav>
+
+<p class="medium-text mb20">Подписчики</p>
+
+@for (subscriber of subscribers$ | async; track subscriber.id) {
+  <app-subscriber-card
+    [profile]="subscriber"
+  ></app-subscriber-card>
+}
+
+<div class="mt20 to-subscribers">
+  <a 
+  [routerLink]="['/subscribers']"
+  class="to-subscribers-link medium-text"
+  >
+    Все подписчики
+    <svg icon="arrow" class="to-subscribers-icon"></svg>
+  </a>
+</div>
+
+<footer class="sidebar__footer">
+  @if (me(); as me) {
+    <img [src]="me.avatarUrl | avatarUrlPipe" [alt]="me.username">
+
+    <div class="medium-text username-text">{{ me.username }}</div>
+
+    <a [routerLink]="['/settings']" class="settings-btn">
+      <svg icon="settings"></svg>
+    </a>
+  }
+</footer>
