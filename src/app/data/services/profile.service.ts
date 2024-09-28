@@ -10,24 +10,28 @@ import { Pageble } from '../interfaces/pageble.inerface';
 export class ProfileService {
 
   http = inject(HttpClient)
-  baseApiUrl = 'https://icherniakov.ru/yt-course'
+  baseApiUrl = 'https://icherniakov.ru/yt-course/account'
   me = signal<Profile | null>(null)
 
   constructor() { }
 
   getTestAccounts() {
-    return this.http.get<Profile[]>(`${this.baseApiUrl}/account/test_accounts`)
+    return this.http.get<Profile[]>(`${this.baseApiUrl}/test_accounts`)
   }
 
   getMe() {
-    return this.http.get<Profile>(`${this.baseApiUrl}/account/me`).pipe(
+    return this.http.get<Profile>(`${this.baseApiUrl}/me`).pipe(
       tap(res => this.me.set(res))
     )
   }
 
-  getSubscribersShortList() {
-    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}/account/subscribers/`).pipe(
-      map(res => res.items.slice(0,3))
+  getAccountById(id: string) {
+    return this.http.get<Profile>(`${this.baseApiUrl}/${id}`)
+  }
+
+  getSubscribersShortList(maxCount: number = 3) {
+    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}/subscribers/`).pipe(
+      map(res => res.items.slice(0,maxCount))
     )
   }
 }

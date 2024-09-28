@@ -1,0 +1,8 @@
+@if (profile(); as profile) {
+  <img class="profile-header__avatar" [src]="profile.avatarUrl | avatarUrlPipe" [alt]="profile.username">
+
+  <div class="username-and-name">
+    <h1 class="h4">{{ profile.firstName }} {{ profile.lastName }}</h1>
+    <span>{{ profile.username }}</span>
+  </div>
+}

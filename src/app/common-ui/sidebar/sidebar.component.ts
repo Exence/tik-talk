@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { ProfileService } from '../../data/services/profile.service';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { SubscriberCardComponent } from "./subscriber-card/subscriber-card.component";
-import { AvatarUrlPipe } from "../../helpers/pipes/img-url.pipe";
+import { AvatarUrlPipe } from "../../helpers/pipes/avatar-url.pipe";
 
 @Component({
   selector: 'app-sidebar',
@@ -22,17 +22,17 @@ export class SidebarComponent implements OnInit {
     {
       label: 'Моя страница',
       icon: 'home',
-      link: ''
+      link: '/profile/me'
     },
     {
       label: 'Чаты',
       icon: 'chats',
-      link: 'chats'
+      link: '/chats'
     },
     {
       label: 'Поиск',
       icon: 'search',
-      link: 'search'
+      link: '/search'
     },
   ]
 
