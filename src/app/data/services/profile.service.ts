@@ -40,4 +40,13 @@ export class ProfileService {
       profile
     )
   }
+
+  uploadAvatar(avatar: File) {
+    const fd = new FormData()
+    fd.append('image', avatar);
+
+    return this.http.post(`${this.baseApiUrl}/upload_image`,
+      fd
+    )
+  }
 }

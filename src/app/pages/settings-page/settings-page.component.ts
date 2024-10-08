@@ -1,19 +1,21 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, ViewChild, effect, inject, viewChild } from '@angular/core';
 import { ProfileHeaderComponent } from "../../common-ui/profile-header/profile-header.component";
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
 import { firstValueFrom } from 'rxjs';
+import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
 
 @Component({
   selector: 'app-settings-page',
   standalone: true,
-  imports: [ReactiveFormsModule, ProfileHeaderComponent],
+  imports: [ReactiveFormsModule, ProfileHeaderComponent, AvatarUploadComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss'
 })
 export class SettingsPageComponent {
   fb = inject(FormBuilder)
   profileService = inject(ProfileService)
+  @ViewChild(AvatarUploadComponent) avatarUploader!:AvatarUploadComponent
 
   settingsForm = this.fb.group(
     {
@@ -37,9 +39,19 @@ export class SettingsPageComponent {
     this.settingsForm.markAllAsTouched()
     this.settingsForm.updateValueAndValidity()
 
-    if (this.settingsForm.valid) {
-      //@ts-ignore
-      firstValueFrom(this.profileService.patchProfile(this.settingsForm.value))
-    }
+    if (this.settingsForm.invalid) return
+    // TODO: add custom stack input
+    //@ts-ignore
+    firstValueFrom(this.profileService.patchProfile(this.settingsForm.value))
+    this.onAvatarUpload(this.avatarUploader.avatar)
+
+      
+  
+  }
+
+  onAvatarUpload(file: File | null) {
+    if (!file || !file.type.match('image')) return
+
+    firstValueFrom(this.profileService.uploadAvatar(file))
   }
 }
