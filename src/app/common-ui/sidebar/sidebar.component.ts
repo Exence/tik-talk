@@ -1,6 +1,6 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ProfileService } from '../../data/services/profile.service';
 import { AsyncPipe, JsonPipe } from '@angular/common';
@@ -10,7 +10,7 @@ import { AvatarUrlPipe } from "../../helpers/pipes/avatar-url.pipe";
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, RouterLink, SvgIconComponent, SubscriberCardComponent, AvatarUrlPipe],
+  imports: [AsyncPipe, JsonPipe, RouterLink, RouterLinkActive, SvgIconComponent, SubscriberCardComponent, AvatarUrlPipe],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
