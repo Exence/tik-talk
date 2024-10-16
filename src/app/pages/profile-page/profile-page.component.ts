@@ -7,18 +7,19 @@ import { switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
 import { AvatarUrlPipe } from "../../helpers/pipes/avatar-url.pipe";
+import { PostInputComponent } from "./post-input/post-input.component";
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
-  imports: [AsyncPipe, ProfileHeaderComponent, RouterLink, SvgIconComponent, AvatarUrlPipe],
+  imports: [AsyncPipe, ProfileHeaderComponent, RouterLink, SvgIconComponent, AvatarUrlPipe, PostInputComponent],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
 })
 export class ProfilePageComponent {
   profileService = inject(ProfileService)
   route = inject(ActivatedRoute)
-  isProfileMeUrl: boolean = false;
+  isProfileMeUrl : boolean = true;
 
   constructor(private router: Router) { }
 

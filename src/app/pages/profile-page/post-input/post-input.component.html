@@ -1,0 +1,14 @@
+<app-circle-avatar 
+  class="size32"
+  [avatarUrl]="avatarUrl"
+/>
+<textarea 
+  class="post-input-textarea"
+  rows="2"
+
+  (input)="onTextareaInput($event)"
+></textarea>
+
+<button class="btn-icon">
+  <svg icon="send-message" class="svg16"></svg>
+</button>

@@ -1,0 +1,26 @@
+:host {
+  padding: 16px 22px;
+  display: grid;
+  grid-template-columns: 32px 1fr 44px;
+  grid-gap: 12px;
+  align-items: center;
+  border: 1px solid var(--light-color);
+  background-color: var(--dark-color);
+}
+
+.post-input-textarea {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+  border: none;
+  background: none;
+  color: var(--light-color);
+  height: 32px;
+  resize: none;
+
+  &:hover,
+  &:focus-visible {
+    outline: 1px solid var(--primary-color);
+  }
+}

@@ -13,7 +13,12 @@
     
   </header>
   <main class="profile-page__body">
-    <div></div>
+    <div>
+      @if (isProfileMeUrl){
+        <app-post-input></app-post-input>
+      }
+      
+    </div>
     <div>
       <h3 class="h6">Подписчики</h3>
 
