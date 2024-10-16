@@ -19,7 +19,7 @@ import { PostInputComponent } from "./post-input/post-input.component";
 export class ProfilePageComponent {
   profileService = inject(ProfileService)
   route = inject(ActivatedRoute)
-  isProfileMeUrl : boolean = true;
+  isProfileMeUrl : boolean = false;
 
   constructor(private router: Router) { }
 

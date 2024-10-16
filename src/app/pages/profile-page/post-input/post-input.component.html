@@ -6,9 +6,10 @@
   class="post-input-textarea"
   rows="2"
 
+  [(ngModel)] = "content"
   (input)="onTextareaInput($event)"
 ></textarea>
 
-<button class="btn-icon">
+<button class="btn-icon" (click)="onSendPost()">
   <svg icon="send-message" class="svg16"></svg>
 </button>
