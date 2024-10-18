@@ -1,0 +1,30 @@
+<app-circle-avatar
+  class="size32"
+  [avatarUrl]="post.author.avatarUrl?? ''"
+></app-circle-avatar>
+
+<div class="post-feed">
+  <div class="post">
+    <div class="post-content">
+      <div class="content-header">
+        <span class="bold-text">{{ post.author.firstName }} {{ post.author.lastName }}</span>
+        <span class="medium-text content-header__time">{{ getCreateOrUpdatePostDateString() }}</span>
+      </div>
+      <div class="medium-text content-text">
+        {{ post.content }}
+      </div>
+    </div>
+    <button class="btn-icon background-none post-menu">
+      <svg icon="ellipsis" class="svg16"></svg>
+    </button>
+  </div>
+  <div class="post-buttons">
+    <button class="btn-icon background-none post-button">
+      <svg icon="comment" class="svg16"></svg> {{ post.comments.length }}
+    </button> 
+  </div>
+  <app-post-input
+    class="comment-input"
+    palaceholder="Напишите комментарий"
+  ></app-post-input>
+</div>

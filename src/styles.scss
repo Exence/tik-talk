@@ -119,6 +119,13 @@ body {
   line-height: 16px;
 }
 
+.bold-text {
+  font-family: "JetBrains Mono", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
 .regular {
   font-size: 14px;
   font-style: normal;
@@ -182,4 +189,8 @@ body {
 .tt-textarea {
   height: 84px;
   resize: none;
+}
+
+.background-none {
+  background: none;
 }

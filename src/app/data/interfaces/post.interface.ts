@@ -20,6 +20,13 @@ export interface Post {
   comments: Comment[]
 }
 
+export interface CommentCreateDto {
+  text: string
+  authorId: number | null
+  postId: number
+  commentId: number | null
+}
+
 export interface Comment {
   id: number,
   text: string,

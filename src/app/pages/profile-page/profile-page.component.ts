@@ -10,11 +10,25 @@ import { AvatarUrlPipe } from "../../helpers/pipes/avatar-url.pipe";
 import { PostInputComponent } from '../../common-ui/post-input/post-input.component';
 import { PostCreateDto } from '../../data/interfaces/post.interface';
 import { PostService } from '../../data/services/post.service';
+import { PostFeedComponent } from "./post-feed/post-feed.component";
+
+const angularimports = [
+  AsyncPipe,
+  RouterLink,
+]
+
+const appImports = [
+  AvatarUrlPipe,
+  PostFeedComponent,
+  PostInputComponent,
+  ProfileHeaderComponent,
+  SvgIconComponent,
+]
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
-  imports: [AsyncPipe, ProfileHeaderComponent, RouterLink, SvgIconComponent, AvatarUrlPipe, PostInputComponent],
+  imports: [ ...angularimports, ...appImports ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
 })
@@ -26,7 +40,7 @@ export class ProfilePageComponent {
   #me = this.#profileService.me
   #me$ = toObservable(this.#me)
 
-  isProfileMeUrl : boolean = false;
+  isProfileMeUrl : boolean = true;
 
   constructor(private router: Router) { }
 

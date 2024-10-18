@@ -8,12 +8,19 @@ import { Post, PostCreateDto } from "../interfaces/post.interface";
 })
 export class PostService {
   #httpClient = inject(HttpClient)
-  baseApiUrl = 'https://icherniakov.ru/yt-course'
+  #baseApiUrl = 'https://icherniakov.ru/yt-course'
 
   createPost(payload: PostCreateDto) {
     return this.#httpClient.post<Post>(
-      `${this.baseApiUrl}/post/`,
+      `${this.#baseApiUrl}/post/`,
       payload
     )
   }
+
+  getPosts() {
+    return this.#httpClient.get<Post[]>(
+      `${this.#baseApiUrl}/post/`
+    )
+  }
+
 }

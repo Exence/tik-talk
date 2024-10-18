@@ -1,11 +1,8 @@
 import { Component, EventEmitter, inject, Input, Output, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
 import { CircleAvatarComponent } from '../circle-avatar/circle-avatar.component';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { ProfileService } from '../../data/services/profile.service';
-import { PostService } from '../../data/services/post.service';
-import { PostCreateDto } from '../../data/interfaces/post.interface';
 
 @Component({
   selector: 'app-post-input',
