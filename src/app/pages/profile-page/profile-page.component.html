@@ -17,7 +17,7 @@
       @if (isProfileMeUrl){
         <app-post-input
           palaceholder="Напишите что-нибудь"
-        
+          (send)="onSendPost($event)"
         ></app-post-input>
       }
       
