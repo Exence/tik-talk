@@ -4,12 +4,12 @@
 />
 <textarea 
   class="post-input-textarea"
-  rows="2"
+  [placeholder]="palaceholder"
 
   [(ngModel)] = "content"
   (input)="onTextareaInput($event)"
 ></textarea>
 
-<button class="btn-icon" (click)="onSendPost()">
+<button class="btn-icon" (click)="onCreatePost()">
   <svg icon="send-message" class="svg16"></svg>
 </button>

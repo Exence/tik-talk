@@ -1,10 +1,11 @@
-import { Component, inject, Renderer2 } from '@angular/core';
+import { Component, inject, Input, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CircleAvatarComponent } from "../../../common-ui/circle-avatar/circle-avatar.component";
 import { ProfileService } from '../../../data/services/profile.service';
 import { SvgIconComponent } from "../../../common-ui/svg-icon/svg-icon.component";
 import { Post, PostCreateDto } from '../../../data/interfaces/post.interface';
 import { PostService } from '../../../data/services/post.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-post-input',
@@ -14,6 +15,8 @@ import { PostService } from '../../../data/services/post.service';
   styleUrl: './post-input.component.scss'
 })
 export class PostInputComponent {
+  @Input() palaceholder = ''
+
   me = inject(ProfileService).me() 
   avatarUrl = this.me?.avatarUrl ?? ''
   content = ''
@@ -26,13 +29,15 @@ export class PostInputComponent {
     this.#r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px')
   }
 
-  onSendPost() {
+  onCreatePost() {
+    if (!this.content) return
+
     const post: PostCreateDto = {
       title: 'NEW Post',
       content: this.content,
       authorId: this.me!.id,
       communityId: null,
     }
-    this.#postService.sendPost(post)
+    firstValueFrom(this.#postService.createPost(post))
   }
 }
