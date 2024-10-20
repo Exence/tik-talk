@@ -1,24 +1,44 @@
-import { Component, Input } from '@angular/core';
-import { Post } from '../../../../data/interfaces/post.interface';
+import { Component, ElementRef, inject, input, Input, OnInit, Renderer2, signal } from '@angular/core';
+import { Post, CommentCreateDto, Comment } from '../../../../data/interfaces/post.interface';
 import { CircleAvatarComponent } from "../../../../common-ui/circle-avatar/circle-avatar.component";
-import { timeAgo } from '../../../../helpers/time-ago';
+import { getCreateOrUpdatePostDateString } from '../../../../helpers/time-ago';
 import { SvgIconComponent } from '../../../../common-ui/svg-icon/svg-icon.component';
 import { PostInputComponent } from "../../../../common-ui/post-input/post-input.component";
+import { PostService } from '../../../../data/services/post.service';
+import { firstValueFrom, tap } from 'rxjs';
+import { SingleCommentComponent } from "../single-comment/single-comment.component";
 
 @Component({
   selector: 'app-single-post',
   standalone: true,
-  imports: [CircleAvatarComponent, SvgIconComponent, PostInputComponent],
+  imports: [CircleAvatarComponent, SvgIconComponent, PostInputComponent, SingleCommentComponent],
   templateUrl: './single-post.component.html',
   styleUrl: './single-post.component.scss'
 })
-export class SinglePostComponent {
-  @Input() post!: Post
+export class SinglePostComponent implements OnInit{
+  post = input<Post>()
+  comments = signal<Comment[]>([])
 
-  getCreateOrUpdatePostDateString(){
-    const createDate = new Date(this.post.createdAt)
-    const updatedDate = new Date(this.post.updatedAt?? '01 Jan 1970 00:00:00 GMT')
+  postService = inject(PostService)
 
-    return updatedDate > createDate ? `Отредактировано ${timeAgo(updatedDate)}` : timeAgo(updatedDate)
+  ngOnInit(): void {
+      this.comments.set(this.post()!.comments)
+  }
+
+  async onCreateComment(text: string) {
+    const comment: CommentCreateDto = {
+      text: text,
+      postId: this.post()!.id,
+      authorId: null,
+      commentId: null
+    }
+    await firstValueFrom(this.postService.createComment(comment))
+    firstValueFrom(this.postService.getCommenstByPostId(comment.postId)).then(
+      res => this.comments.set(res)
+    )
+  }
+
+  getPostTimeString(createdAt: string, updatedAt: string | null | undefined) {
+    return getCreateOrUpdatePostDateString(createdAt, updatedAt)
   }
 }

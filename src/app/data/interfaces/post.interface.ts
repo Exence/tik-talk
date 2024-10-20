@@ -22,9 +22,9 @@ export interface Post {
 
 export interface CommentCreateDto {
   text: string
-  authorId: number | null
+  authorId: number | null 
   postId: number
-  commentId: number | null
+  commentId: number | null 
 }
 
 export interface Comment {

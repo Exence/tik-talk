@@ -27,3 +27,13 @@ function getPlural(number: number, one: string, two: string, five: string) {
       return five;
   }
 }
+
+export function getCreateOrUpdatePostDateString(createdAt: string, updatedAt: string | null | undefined){
+    if (!updatedAt) {
+        updatedAt = '01 Jan 1970 00:00:00 GMT'
+    }
+    const createDate = new Date(createdAt)
+    const updatedDate = new Date(updatedAt)
+
+    return updatedDate > createDate ? `Отредактировано ${timeAgo(updatedDate)}` : timeAgo(updatedDate)
+  }
