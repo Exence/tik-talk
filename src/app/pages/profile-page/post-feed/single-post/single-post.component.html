@@ -9,7 +9,7 @@
       <div class="post-content">
         <div class="content-header">
           <span class="bold-text">{{ post.author.firstName }} {{ post.author.lastName }}</span>
-          <span class="medium-text content-header__time">{{ getPostTimeString(post.createdAt, post.updatedAt) }}</span>
+          <span class="medium-text content-header__time">{{ post.createdAt | timeAgoPipe : post.updatedAt }}</span>
         </div>
         <p class="medium-text content-text">
           {{ post.content }}

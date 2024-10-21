@@ -6,7 +6,7 @@
   <div class="comment">
     <div class="comment-header">
       <!--TO DO: switch to full name-->
-      <span>{{ comment.author.username }}</span> <span>{{ getCommentTimeString(comment.createdAt, comment.updatedAt) }}</span>
+      <span>{{ comment.author.username }}</span> <span>{{ comment.createdAt | timeAgoPipe : comment.updatedAt }}</span>
     </div>
     <div class="comment-body">
       <p class="medium-text"> {{ comment.text }}</p>
