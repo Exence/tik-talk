@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostListener, inject, Input, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Renderer2 } from '@angular/core';
 import { PostService } from '../../../data/services/post.service';
 import { SinglePostComponent } from "./single-post/single-post.component";
-import { firstValueFrom } from 'rxjs';
+import { auditTime, firstValueFrom, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-post-feed',
@@ -10,29 +10,32 @@ import { firstValueFrom } from 'rxjs';
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss'
 })
-export class PostFeedComponent implements AfterViewInit{
+export class PostFeedComponent implements AfterViewInit {
   postService = inject(PostService)
   posts = this.postService.posts
 
   #hostElement = inject(ElementRef)
   #r2 = inject(Renderer2)
 
-  // TO DO: do rarely
-  @HostListener('window: resize')
-  onWindowResize() {
-    this.resizeFeed()
-  }
-
   constructor() {
     firstValueFrom(this.postService.getPosts())
   }
 
   ngAfterViewInit(): void {
-      this.resizeFeed()
+      setTimeout(() => this.resizeFeed(), 100)
+
+      fromEvent(window, 'resize')
+      .pipe(
+        auditTime(500)
+      )
+      .subscribe(() => {
+        this.resizeFeed()
+      })
   }
 
   resizeFeed() {
     const { top } = this.#hostElement.nativeElement.getBoundingClientRect()
+    console.log(top)
 
     const height = window.innerHeight - top - 24 - 24
 
