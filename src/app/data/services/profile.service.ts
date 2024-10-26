@@ -37,7 +37,7 @@ export class ProfileService {
     )
   }
 
-  getAccountById(id: string) {
+  getAccountById(id: number) {
     return this.http.get<Profile>(`${this.accountApiUrl}/${id}`)
   }
 

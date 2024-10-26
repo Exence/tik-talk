@@ -20,7 +20,7 @@ export class TimeOrDatePipe implements PipeTransform {
 
     const isSameDate = this.formatDate(now) === this.formatDate(datetime);
 
-    return isSameDate? this.formatDate(datetime) : this.formatTime(datetime)
+    return isSameDate?  this.formatTime(datetime) : this.formatDate(datetime)
     
   }
 

@@ -1,8 +1,9 @@
 :host {
   display: grid;
+  min-height: 290px;
   grid-template-columns: 380px 1fr;
   background: var(--dark-color);
-  border: var(--light-border);  
+  border: var(--light-border); 
 }
 
 .empty-chats {
@@ -21,5 +22,16 @@
     display: block;
     width: max-content;
     align-self: center;
+  }
+}
+
+.chat-workspace {
+  display: block;
+  height: 100%;
+  min-height: 290px;
+
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

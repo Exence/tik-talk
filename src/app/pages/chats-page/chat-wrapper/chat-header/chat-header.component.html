@@ -1,1 +1,8 @@
-<p>chat-header works!</p>
+@if (companion(); as companion) {
+  <app-circle-avatar
+    class="size32"
+  [avatarUrl]="companion.avatarUrl"
+  ></app-circle-avatar>
+  <span class="bold-text">{{ companion.firstName }} {{ companion.lastName }}</span>
+}
+

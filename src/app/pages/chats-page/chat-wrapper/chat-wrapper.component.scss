@@ -4,3 +4,22 @@
     display: none;
   }
 }
+
+.chat-area {
+  height: calc(100% - 76px);
+
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  grid-gap: 16px;
+}
+
+.chat-area__input {
+  margin: 16px 20px;
+}
+
+.chat-messages {
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

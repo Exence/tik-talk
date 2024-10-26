@@ -1,1 +1,17 @@
-<p>chat-message works!</p>
+@if (message(); as message) {
+  <app-circle-avatar
+    class="size32"
+    [avatarUrl]="profile.avatarUrl"
+  ></app-circle-avatar>
+  <div class="message-content">
+    <div class="message-content__header tt-control-label">
+      {{ profile.firstName }} {{ profile.lastName }} {{ message.createdAt | timeOrDatePipe }} 
+    </div>
+    <div class="message-content__body">
+      {{ message.text }}
+    </div>
+  </div>
+  
+
+
+}

@@ -5,6 +5,7 @@ export interface Chat {
   userFirst: Profile
   userSecond: Profile
   messages: Message[] | null
+  companion?: Profile
 }
 
 export interface MyChat {
@@ -23,4 +24,8 @@ export interface Message {
   createdAt: string
   isRead: boolean
   updatedAt: string | null
+}
+
+export interface MessageCreateDto {
+  message: string
 }

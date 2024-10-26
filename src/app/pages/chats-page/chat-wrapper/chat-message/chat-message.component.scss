@@ -1,0 +1,33 @@
+:host {
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  grid-gap: 12px;
+
+  &.my-message {
+    direction: rtl;
+
+    & .message-content__body {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+    }
+  }
+}
+
+.message-content {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  grid-gap: 8px;
+}
+
+.message-content__body {
+  padding: 8px 16px;
+  width: max-content;
+  background-color: var(--dark-active-color);
+  color: var(--light-color);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: left;
+}
+
