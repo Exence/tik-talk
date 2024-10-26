@@ -1,0 +1,20 @@
+<div class="chat-search">
+  <div class="chat-search-wrapper">
+    <input 
+      type="text"
+      placeholder="Искать..."
+      class="tt-form-input chat-search__input" 
+      controlName="firstName"
+    >
+    <svg icon="search" class="chat-search__icon"></svg>
+  </div>
+  
+</div>
+<div class="chat-btns">
+  @for (chat of myChats(); track chat.id) {
+    <app-chat-btn
+      [chat]="chat"
+    ></app-chat-btn>
+  }
+</div>
+

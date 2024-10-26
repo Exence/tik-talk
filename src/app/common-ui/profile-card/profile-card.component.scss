@@ -36,3 +36,9 @@
   gap: 4px;
   height: min-content;
 }
+
+.profile-card__action-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

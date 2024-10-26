@@ -1,0 +1,25 @@
+:host {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  background: var(--dark-color);
+  border: var(--light-border);  
+}
+
+.empty-chats {
+  height: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  grid-column: 1 / -1;
+  text-align: center;
+
+  & .btn {
+    text-decoration: none;
+    display: block;
+    width: max-content;
+    align-self: center;
+  }
+}

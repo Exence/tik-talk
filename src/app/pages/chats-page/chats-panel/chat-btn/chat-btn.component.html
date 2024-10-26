@@ -1,0 +1,24 @@
+@if(chat(); as chat){
+  <a 
+    class="btn chat-btn"
+    [routerLink]="['/chats',chat.id]"
+  >
+    <app-circle-avatar
+    class="size32"
+    [avatarUrl]="chat.userFrom.avatarUrl"
+  ></app-circle-avatar>
+  <div class="chat-btn-content  medium-text">
+    <div class="chat-btn-content__header">
+      <span>{{ chat.userFrom.firstName }} {{ chat.userFrom.lastName }}</span>
+      <span>{{ chat.createdAt | timeOrDatePipe }}</span>
+    </div>
+    <div class="chat-btn-content__preview">
+      @if (chat.message; as message) {
+        <span>{{ message }}</span>
+      }@else {
+        <span class="chat-btn-content__empty">У вас пока нет сообщений. Напишите первым!</span>
+      }
+    </div>
+  </div>
+</a>
+}

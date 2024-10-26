@@ -4,6 +4,7 @@ import { catchError, tap, throwError } from 'rxjs';
 import { Token } from './auth.interfaces';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { baseApiUrl } from '../data/config';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AuthService {
   }
 
   private httpClient = inject(HttpClient)
-  private baseExternalUrl = 'https://icherniakov.ru/yt-course/auth'
+  private baseExternalUrl = `${baseApiUrl}/auth`
 
   getAuthToken(payload: {username: string, password: string}){
     const fd = new FormData()

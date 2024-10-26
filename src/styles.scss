@@ -170,6 +170,7 @@ body {
 }
 
 .tt-form-input {
+  font-family: "JetBrains Mono", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -179,6 +180,7 @@ body {
   color: var(--light-color);
   border-bottom: 1px solid var(--light-color);
   height: 33px;
+  width: 100%;
 
   &:focus-visible {
     outline: 1px solid var(--primary-color);

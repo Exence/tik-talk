@@ -1,6 +1,6 @@
 @if (profile(); as profile) {
   <app-circle-avatar
-    [avatarUrl]="profile.avatarUrl?? ''"
+    [avatarUrl]="profile.avatarUrl"
   />
   <div class="username-and-name">
     <h1 class="h4">{{ profile.firstName }} {{ profile.lastName }}</h1>

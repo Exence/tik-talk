@@ -9,5 +9,5 @@ import { AvatarUrlPipe } from "../../helpers/pipes/avatar-url.pipe";
   styleUrl: './circle-avatar.component.scss'
 })
 export class CircleAvatarComponent {
-  avatarUrl = input('')
+  avatarUrl = input<string | null>(null)
 }

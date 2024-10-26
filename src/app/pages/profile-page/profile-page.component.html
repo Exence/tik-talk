@@ -4,17 +4,22 @@
       [profile]="profile"  
     ></app-profile-header>
 
-    @if (isProfileMeUrl) {
+    @if (isProfileMeUrl()) {
       <a [routerLink]="['/settings']" class="btn to-setting-btn">
         Редактировать
         <svg icon="settings" class="to-setting-icon"></svg>
       </a>
+    }@else {
+      <button class="btn to-setting-btn" (click)="onCreateChat(profile.id)">
+        Написать
+        <svg icon="send-message" class="to-setting-icon"></svg>
+      </button>
     }
     
   </header>
   <main class="profile-page__body">
     <div>
-      @if (isProfileMeUrl){
+      @if (isProfileMeUrl()){
         <app-post-input
           palaceholder="Напишите что-нибудь"
           (send)="onSendPost($event)"
