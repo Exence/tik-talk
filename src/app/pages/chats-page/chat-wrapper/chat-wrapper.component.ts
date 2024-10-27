@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, inject, signal, ViewChild } from 
 import { ChatHeaderComponent } from "./chat-header/chat-header.component";
 import { PostInputComponent } from "../../../common-ui/post-input/post-input.component";
 import { ActivatedRoute } from '@angular/router';
-import { firstValueFrom, switchMap, tap } from 'rxjs';
+import { firstValueFrom, Subscription, switchMap, tap, timer } from 'rxjs';
 import { ChatService } from '../../../data/services/chat.service';
 import { AsyncPipe } from '@angular/common';
 import { Message } from '../../../data/interfaces/chat.interface';
@@ -26,7 +26,34 @@ export class ChatWrapperComponent implements AfterViewInit{
   messages = signal<Message[]>([])
   me = inject(ProfileService).me()
 
+  #messagesTimer = timer(2000, 5000)
+  #messagesTimerSubscription!: Subscription
+
   activeChat$ = this.#route.params.pipe(
+    tap(({id}) => {
+      this.#messagesTimerSubscription = this.#messagesTimer.subscribe(() => {
+
+        firstValueFrom(this.#chatService.getChatById(id).pipe(
+          tap((chat) => {
+            let isScrollNeeded = false
+            if(this.chatMessages) {
+              const container = this.chatMessages.nativeElement
+              isScrollNeeded = container.scrollHeight - container.scrollTop === container.clientHeight
+            }
+
+            this.messages.set(chat.messages?? [])
+
+            if(isScrollNeeded) {
+              setTimeout(() => {
+                this.scrollToBottom();
+              }, 100);
+            }
+          })
+        ))
+
+        
+      });
+    }),
     switchMap(({id}) => this.#chatService.getChatById(id).pipe(
       tap((chat) => this.messages.set(chat.messages?? []))
     ))
@@ -41,7 +68,12 @@ export class ChatWrapperComponent implements AfterViewInit{
 
   onSendMessage(chatId: number, text: string){
     firstValueFrom(this.#chatService.sendMessage(chatId,text).pipe(
-      tap((message) => this.messages.set([...this.messages(), message]))
+      tap((message) => {
+        this.messages.set([...this.messages(), message])
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 100);
+      })
     ))
   }
 
@@ -50,5 +82,9 @@ export class ChatWrapperComponent implements AfterViewInit{
       const container = this.chatMessages.nativeElement;
       container.scrollTop = container.scrollHeight;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.#messagesTimerSubscription.unsubscribe()
   }
 }

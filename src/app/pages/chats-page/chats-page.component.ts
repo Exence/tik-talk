@@ -2,7 +2,7 @@ import { Component, ElementRef, inject, OnInit, Renderer2, signal } from '@angul
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ChatsPanelComponent } from "./chats-panel/chats-panel.component";
 import { ChatService } from '../../data/services/chat.service';
-import { auditTime, firstValueFrom, fromEvent, Subject, takeUntil } from 'rxjs';
+import { auditTime, firstValueFrom, fromEvent, Subject, Subscription, takeUntil, timer } from 'rxjs';
 
 @Component({
   selector: 'app-chats-page',
@@ -14,14 +14,15 @@ import { auditTime, firstValueFrom, fromEvent, Subject, takeUntil } from 'rxjs';
 export class ChatsPageComponent implements OnInit{
   #chatService = inject(ChatService)
   
-  #destroy$ = new Subject<void>();
+  #destroy$ = new Subject<void>()
   #hostElement = inject(ElementRef)
   #r2 = inject(Renderer2)
 
   chats = this.#chatService.myChats
 
+
   ngOnInit(): void {
-      firstValueFrom(this.#chatService.getMyChats())
+    firstValueFrom(this.#chatService.getMyChats())
   }
 
   ngAfterViewInit(): void {
@@ -47,8 +48,8 @@ resizeFeed() {
 }
 
 ngOnDestroy(): void {
-  this.#destroy$.next();
-  this.#destroy$.complete();
+  this.#destroy$.next()
+  this.#destroy$.complete()
 }
   
 }
