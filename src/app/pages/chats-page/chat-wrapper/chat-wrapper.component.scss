@@ -1,4 +1,6 @@
 :host {
+  width: 100%;
+  max-width: 100%;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -22,4 +24,15 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.chat-messages__empty {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--light-transparent-color);
 }

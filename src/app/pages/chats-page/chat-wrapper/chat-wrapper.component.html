@@ -3,13 +3,18 @@
     [companion]="chat.companion"
   ></app-chat-header>
   <div class="chat-area">
-    <div class="chat-messages">
-      @for (message of messages(); track message.id) {
-        <app-chat-message
-          [message]="message"
-          [profile]="message.userFromId === me!.id ? me! : chat.companion!"
-        ></app-chat-message>
+    <div class="chat-messages" #chatMessages>
+      @if(messages().length) {
+        @for (message of messages(); track message.id) {
+          <app-chat-message
+            [message]="message"
+            [profile]="message.userFromId === me!.id ? me! : chat.companion!"
+          ></app-chat-message>
+        }
+      } @else {
+        <h4 class="medium-text chat-messages__empty">В данном чате пока нет сообщений...Напишите первым!</h4>
       }
+      
     </div>
     <app-post-input
       class="chat-area__input"

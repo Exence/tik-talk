@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { ChatHeaderComponent } from "./chat-header/chat-header.component";
 import { PostInputComponent } from "../../../common-ui/post-input/post-input.component";
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,10 @@ import { ProfileService } from '../../../data/services/profile.service';
   templateUrl: './chat-wrapper.component.html',
   styleUrl: './chat-wrapper.component.scss'
 })
-export class ChatWrapperComponent {
+export class ChatWrapperComponent implements AfterViewInit{ 
+  @ViewChild("chatMessages", {static: false})
+  chatMessages!: ElementRef
+
   #route = inject(ActivatedRoute)
   #chatService = inject(ChatService)
 
@@ -29,9 +32,23 @@ export class ChatWrapperComponent {
     ))
   )
 
+  ngAfterViewInit(): void {
+    
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 1000);
+  }
+
   onSendMessage(chatId: number, text: string){
     firstValueFrom(this.#chatService.sendMessage(chatId,text).pipe(
       tap((message) => this.messages.set([...this.messages(), message]))
     ))
+  }
+
+  scrollToBottom() {
+    if (this.chatMessages) { 
+      const container = this.chatMessages.nativeElement;
+      container.scrollTop = container.scrollHeight;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, effect, inject, viewChild } from '@angular/core';
+import { Component, ViewChild, effect, inject } from '@angular/core';
 import { ProfileHeaderComponent } from "../../common-ui/profile-header/profile-header.component";
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
