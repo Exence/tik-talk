@@ -36,3 +36,11 @@
   font-weight: 400;
   color: var(--light-transparent-color);
 }
+
+.chat-messages__date {
+  padding: 6px 30px;
+  margin: 16px auto;
+  width: max-content;
+  background-color: var(--dark-hover-color);
+  
+}

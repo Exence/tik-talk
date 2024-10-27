@@ -35,7 +35,6 @@ export class ChatsPageComponent implements OnInit{
     )
     .subscribe(() => {
       this.resizeFeed()
-      
     })
 }
 
