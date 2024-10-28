@@ -12,6 +12,7 @@
     }
 
     & .message-content__body {
+      direction: ltr;
       background-color: var(--primary-color);
       color: var(--dark-color);
 

@@ -18,7 +18,6 @@ export class ChatService {
   #messageApi = `${baseApiUrl}/message`
   
 
-
   myChats = signal<MyChat[]>([])
 
   getMyChats() {
@@ -33,6 +32,7 @@ export class ChatService {
 
   getChatById(chatId: number) {
     return this.#httpClient.get<Chat>(`${this.#chatApi}/${chatId}`).pipe(
+      tap(() => {firstValueFrom(this.getMyChats())}),
       map(chat => {
         return {
           ...chat,
@@ -45,7 +45,6 @@ export class ChatService {
   sendMessage(chatId: number, text: string) {
     const payload = {message: text}
     const params = new HttpParams({ fromObject: payload });
-    let profile: Profile
 
     return this.#httpClient.post<Message>(`${this.#messageApi}/send/${chatId}`,{}, { params })
   }
