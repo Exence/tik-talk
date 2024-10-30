@@ -3,13 +3,11 @@ import { inject, Injectable, signal } from '@angular/core';
 import {
   Chat,
   Message,
-  MessageCreateDto,
   MyChat,
 } from '../interfaces/chat.interface';
-import { baseApiUrl } from '../config';
-import { firstValueFrom, map, switchMap, tap } from 'rxjs';
+import { baseApiUrl } from '@tt/shared';
+import { firstValueFrom, map, tap } from 'rxjs';
 import { ProfileService } from './profile.service';
-import { Profile } from '../interfaces/profile.interface';
 
 @Injectable({
   providedIn: 'root',

@@ -5,9 +5,7 @@ import {
   BehaviorSubject,
   catchError,
   filter,
-  firstValueFrom,
   switchMap,
-  take,
   tap,
   throwError,
 } from 'rxjs';

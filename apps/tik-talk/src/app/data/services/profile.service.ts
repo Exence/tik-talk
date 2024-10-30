@@ -3,7 +3,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { map, tap } from 'rxjs';
 import { Profile } from '../interfaces/profile.interface';
 import { Pageble } from '../interfaces/pageble.inerface';
-import { baseApiUrl } from '../config';
+import { baseApiUrl } from '@tt/shared';
 
 @Injectable({
   providedIn: 'root',

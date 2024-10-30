@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { baseApiUrl } from '../../data/config';
+import { baseApiUrl } from '@tt/shared';
 
 @Pipe({
   name: 'avatarUrlPipe',

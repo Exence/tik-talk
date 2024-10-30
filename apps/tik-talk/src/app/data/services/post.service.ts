@@ -6,8 +6,8 @@ import {
   CommentCreateDto,
   Comment,
 } from '../interfaces/post.interface';
-import { firstValueFrom, map, switchMap, tap } from 'rxjs';
-import { baseApiUrl } from '../config';
+import { map, switchMap, tap } from 'rxjs';
+import { baseApiUrl } from '@tt/shared';
 
 @Injectable({
   providedIn: 'root',
