@@ -1,0 +1,15 @@
+@if (chats().length) {
+<app-chats-panel></app-chats-panel>
+
+<div class="chat-workspace">
+  <router-outlet></router-outlet>
+</div>
+} @else {
+<div class="empty-chats">
+  <p>
+    У Вас пока нет активных чатов. Для поиска можно воспользоваться кнопкой
+    ниже:
+  </p>
+  <a [routerLink]="['/search']" class="btn">Найти собеседника</a>
+</div>
+}
