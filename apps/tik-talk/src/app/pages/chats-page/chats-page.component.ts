@@ -4,7 +4,6 @@ import {
   inject,
   OnInit,
   Renderer2,
-  signal,
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ChatsPanelComponent } from './chats-panel/chats-panel.component';
@@ -14,9 +13,7 @@ import {
   firstValueFrom,
   fromEvent,
   Subject,
-  Subscription,
   takeUntil,
-  timer,
 } from 'rxjs';
 
 @Component({

@@ -4,18 +4,19 @@ import {
   inject,
   Input,
   input,
-  signal,
 } from '@angular/core';
+
+import { DatePipe } from '@angular/common';
 import { Message } from '../../../../data/interfaces/chat.interface';
 import { CircleAvatarComponent } from '../../../../common-ui/circle-avatar/circle-avatar.component';
 import { Profile } from '../../../../data/interfaces/profile.interface';
-import { TimeOrDatePipe } from '../../../../helpers/pipes/time-or-date.pipe';
 import { ProfileService } from '../../../../data/services/profile.service';
+import { AddTimezonePipe } from '../../../../helpers/pipes/add-timezone.pipe';
 
 @Component({
   selector: 'app-chat-message',
   standalone: true,
-  imports: [CircleAvatarComponent, TimeOrDatePipe],
+  imports: [CircleAvatarComponent, DatePipe, AddTimezonePipe],
   templateUrl: './chat-message.component.html',
   styleUrl: './chat-message.component.scss',
 })

@@ -12,9 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom, Subscription, switchMap, tap, timer } from 'rxjs';
 import { ChatService } from '../../../data/services/chat.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { Message } from '../../../data/interfaces/chat.interface';
+import { DatedMessages, Message } from '../../../data/interfaces/chat.interface';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { ProfileService } from '../../../data/services/profile.service';
+import { RelativeDatePipe } from '../../../helpers/pipes/relative-date.pipe';
 
 @Component({
   selector: 'app-chat-wrapper',
@@ -25,6 +26,7 @@ import { ProfileService } from '../../../data/services/profile.service';
     AsyncPipe,
     ChatMessageComponent,
     DatePipe,
+    RelativeDatePipe,
   ],
   templateUrl: './chat-wrapper.component.html',
   styleUrl: './chat-wrapper.component.scss',
@@ -38,7 +40,7 @@ export class ChatWrapperComponent implements AfterViewInit {
   #route = inject(ActivatedRoute);
   #chatService = inject(ChatService);
 
-  messages = signal<Message[]>([]);
+  messages = signal<DatedMessages[]>([]);
   me = inject(ProfileService).me();
 
   #messagesTimer = timer(2000, 5000);
@@ -51,33 +53,13 @@ export class ChatWrapperComponent implements AfterViewInit {
 
       this.#currentDate = '';
       this.#messagesTimerSubscription = this.#messagesTimer.subscribe(() => {
-        firstValueFrom(
-          this.#chatService.getChatById(id).pipe(
-            tap((chat) => {
-              let isScrollNeeded = false;
-              if (this.chatMessages) {
-                const container = this.chatMessages.nativeElement;
-                isScrollNeeded =
-                  container.scrollHeight - container.scrollTop ===
-                  container.clientHeight;
-              }
-
-              this.messages.set(chat.messages ?? []);
-
-              if (isScrollNeeded) {
-                setTimeout(() => {
-                  this.scrollToBottom();
-                }, 100);
-              }
-            })
-          )
-        );
+        this.getChatById(id)
       });
     }),
     switchMap(({ id }) =>
       this.#chatService
         .getChatById(id)
-        .pipe(tap((chat) => this.messages.set(chat.messages ?? [])))
+        .pipe(tap((chat) => this.messages.set(chat.datedMessages ?? [])))
     )
   );
 
@@ -87,17 +69,32 @@ export class ChatWrapperComponent implements AfterViewInit {
     }, 1000);
   }
 
-  onSendMessage(chatId: number, text: string) {
-    firstValueFrom(
-      this.#chatService.sendMessage(chatId, text).pipe(
-        tap((message) => {
-          this.messages.set([...this.messages(), message]);
-          setTimeout(() => {
-            this.scrollToBottom();
-          }, 100);
+  async getChatById(id: number) {
+    return await firstValueFrom(
+      this.#chatService.getChatById(id).pipe(
+        tap((chat) => {
+          let isScrollNeeded = false;
+          if (this.chatMessages) {
+            const container = this.chatMessages.nativeElement;
+            isScrollNeeded =
+              container.scrollHeight - container.scrollTop ===
+              container.clientHeight;
+          }
+          this.messages.set(chat.datedMessages ?? []);
+
+          if (isScrollNeeded) {
+            setTimeout(() => {
+              this.scrollToBottom();
+            }, 100);
+          }
         })
       )
     );
+  }
+
+  async onSendMessage(chatId: number, text: string) {
+    await firstValueFrom(this.#chatService.sendMessage(chatId, text));
+    this.getChatById(chatId)
   }
 
   scrollToBottom() {

@@ -11,7 +11,7 @@
   <div class="chat-btn-content medium-text">
     <div class="chat-btn-content__header">
       <span>{{ chat.userFrom.firstName }} {{ chat.userFrom.lastName }}</span>
-      <span>{{ chat.createdAt | timeOrDatePipe }}</span>
+      <span>{{ chat.createdAt | addTimezonePipe | timeOrDatePipe }}</span>
     </div>
     <div class="chat-btn-content__preview">
       @if (chat.message; as message) {

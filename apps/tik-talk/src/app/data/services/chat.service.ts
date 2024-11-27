@@ -3,11 +3,13 @@ import { inject, Injectable, signal } from '@angular/core';
 import {
   Chat,
   Message,
+  DatedMessages,
   MyChat,
 } from '../interfaces/chat.interface';
 import { baseApiUrl } from '@tt/shared';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { ProfileService } from './profile.service';
+import { DateTime } from 'luxon'
 
 @Injectable({
   providedIn: 'root',
@@ -42,9 +44,31 @@ export class ChatService {
           ...chat,
           companion:
             chat.userFirst.id === this.#myId ? chat.userSecond : chat.userFirst,
+          datedMessages: this.groupMessagesByDate(chat.messages?? [])
         };
       })
     );
+  }
+
+  groupMessagesByDate(messages: Message[]) {
+    const groupMessages: Record<string, Message[]> = {}
+    messages.forEach(
+      (message) => {
+        const date = DateTime.fromISO(message.createdAt).toISODate()?? 'No date';
+        
+        if (!groupMessages[date]) groupMessages[date] = []
+
+        groupMessages[date].push(message)
+      }
+    )
+
+    const result: DatedMessages[] = []
+    
+    Object.entries(groupMessages).forEach(([date, messages]) => {
+      result.push({date: date, messages: messages})
+    })
+
+    return result
   }
 
   sendMessage(chatId: number, text: string) {

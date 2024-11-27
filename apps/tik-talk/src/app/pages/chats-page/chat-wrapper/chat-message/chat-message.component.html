@@ -6,7 +6,7 @@
 <div class="message-content">
   <div class="message-content__header tt-control-label">
     <span>{{ profile.firstName }} {{ profile.lastName }}</span>
-    <span>{{ message.createdAt | timeOrDatePipe }}</span>
+    <span>{{ message.createdAt | addTimezonePipe | date : 'HH:mm' }}</span>
   </div>
   <div class="flex-container">
     <div class="message-content__body">
