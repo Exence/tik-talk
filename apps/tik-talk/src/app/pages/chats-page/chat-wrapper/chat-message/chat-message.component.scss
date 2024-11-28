@@ -26,9 +26,10 @@
 }
 
 .message-content {
-  display: grid;
-  grid-template-rows: max-content 1fr;
-  grid-gap: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .message-content__body {
@@ -41,6 +42,9 @@
   font-weight: 500;
   line-height: 21px;
   text-align: left;
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  white-space: normal; 
 
   mask: linear-gradient(#000 0 0),
     linear-gradient(-225deg, #000 50%, #0000 0) border-box 100% 100% / 200% 200%

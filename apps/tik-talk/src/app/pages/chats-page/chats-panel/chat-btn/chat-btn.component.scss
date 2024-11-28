@@ -23,6 +23,9 @@
   display: grid;
   grid-template-rows: 16px min-content;
   grid-gap: 16px;
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  white-space: normal; 
 }
 
 .chat-btn-content__header {
