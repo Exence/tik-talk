@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -8,7 +7,7 @@ import { ChatService } from '@tt/chats';
 import { AvatarUrlPipe } from '@tt/shared';
 import { PostFeedComponent, PostInputComponent, PostService, PostCreateDto } from '@tt/posts';
 import { SvgIconComponent } from '@tt/common-ui';
-import { ProfileService } from '@tt/profiles';
+import { ProfileService, ProfileHeaderComponent } from '@tt/profiles';
 
 const angularimports = [AsyncPipe, RouterLink];
 

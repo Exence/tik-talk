@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { map, tap } from 'rxjs';
-import { Profile } from '../interfaces/profile.interface';
 import { Pageble, baseApiUrl } from '@tt/shared';
+import { Profile } from '@tt/common-interfaces/profile';
 
 @Injectable({
   providedIn: 'root',

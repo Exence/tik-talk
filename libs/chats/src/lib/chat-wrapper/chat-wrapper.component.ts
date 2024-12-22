@@ -7,15 +7,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ChatHeaderComponent } from '../chat-header/chat-header.component';
-import { ActivatedRoute } from '@angular/router';
-import { firstValueFrom, Subscription, switchMap, tap, timer } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, firstValueFrom, of, Subscription, switchMap, tap, timer } from 'rxjs';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { DatedMessages } from '../data/interfaces/chat.interface';
 import { ChatMessageComponent } from '../chat-message/chat-message.component';
 import { PostInputComponent } from '@tt/posts';
 import { RelativeDatePipe } from '@tt/shared';
 import { ProfileService } from '@tt/profiles';
 import { ChatService } from '../data/services/chat.service';
+import { DatedMessages } from '../data/interfaces/chat.interface';
 
 @Component({
   selector: 'app-chat-wrapper',
@@ -36,6 +36,7 @@ export class ChatWrapperComponent implements AfterViewInit {
   chatMessages!: ElementRef;
 
   #route = inject(ActivatedRoute);
+  #router = inject(Router)
   #chatService = inject(ChatService);
 
   messages = signal<DatedMessages[]>([]);
@@ -53,10 +54,26 @@ export class ChatWrapperComponent implements AfterViewInit {
         this.getChatById(id)
       });
     }),
-    switchMap(({ id }) =>
-      this.#chatService
+    switchMap(({ id }) => {
+      if (id === 'new') {
+        return this.#route.queryParams.pipe(
+          filter(({userId}) => userId),
+          switchMap(({userId}) => {
+            return this.#chatService.createChat(userId).pipe(
+              switchMap(chatId => {
+                this.#router.navigate(['/chats', chatId])
+                return of(null)
+              })
+            )
+          })
+
+        )
+      }
+      return this.#chatService
         .getChatById(id)
         .pipe(tap((chat) => this.messages.set(chat.datedMessages ?? [])))
+    }
+      
     )
   );
 

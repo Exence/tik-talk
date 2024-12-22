@@ -13,5 +13,5 @@
     "jest.config.ts",
     "src/**/*.test.ts"
   ],
-  "include": ["src/**/*.ts", "../common-interfaces/src/lib/profile/profile.interface.ts"]
+  "include": ["src/**/*.ts"]
 }

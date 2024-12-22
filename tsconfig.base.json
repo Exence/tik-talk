@@ -17,14 +17,16 @@
     "target": "ES2022",
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
-    "paths": {
-      "@tt/*": ["libs/*"],
+    "paths": {  
       "@tt/auth": ["libs/auth/src/index.ts"],
+      "@tt/chats": ["libs/chats/src/index.ts"],
       "@tt/common-ui": ["libs/common-ui/src/index.ts"],
       "@tt/posts": ["libs/posts/src/index.ts"],
       "@tt/profiles": ["libs/profiles/src/index.ts"],
       "@tt/shared": ["libs/shared/src/index.ts"],
-      "@tt/chats": ["libs/chats/src/index.ts"]
+      "@tt/sidebar": ["libs/sidebar/src/index.ts"],
+      "@tt/common-interfaces/*": ["libs/common-interfaces/src/lib/*"],
+      "@tt/*": ["libs/*"]
     },
     "baseUrl": ".",
     "rootDir": "."

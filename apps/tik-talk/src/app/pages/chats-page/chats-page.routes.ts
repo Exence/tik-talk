@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ChatsPageComponent } from './chats-page.component';
-import { SearchLayoutComponent } from '../../common-ui/search-layout/search-layout.component';
 import { ChatWrapperComponent } from '@tt/chats';
+import { SearchLayoutComponent } from '@tt/common-ui';
 
 export const ChatsPageRoutes: Routes = [
   {

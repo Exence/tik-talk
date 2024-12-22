@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { JsonPipe } from '@angular/common';
-import { ProfileCardComponent } from './common-ui/profile-card/profile-card.component';
+import { ProfileCardComponent } from '@tt/profiles';
 
 @Component({
   selector: 'app-root',

@@ -1,8 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
-import { ChatService } from '@tt/chats';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
-import { Profile } from '@tt/profiles';
+import { Profile } from '@tt/common-interfaces/profile';
 import { AvatarUrlPipe } from '@tt/shared';
 
 @Component({
@@ -15,12 +13,9 @@ import { AvatarUrlPipe } from '@tt/shared';
 export class ProfileCardComponent {
   @Input() profile!: Profile;
 
-  #chatService = inject(ChatService);
   #router = inject(Router);
 
   async onCreateChat(id: number) {
-    firstValueFrom(this.#chatService.createChat(id)).then((res) => {
-      this.#router.navigate(['/chats', res.id]);
-    });
+    this.#router.navigate(['/chats', 'new'], {queryParams: {userId: id}});
   }
 }
