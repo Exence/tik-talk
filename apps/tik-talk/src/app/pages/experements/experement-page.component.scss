@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.form-wrapper {
+  display: grid;
+  place-self: center;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+}
+
+fieldset {
+  padding: 20px;
+}
+
+.control-error {
+  display: block;
+  color: tomato;
+}
+
+.address__input {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+  grid-gap: 10px;
+}
+
+.tt-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.tt-input.ng-touched.ng-invalid {
+  border: 1px solid tomato;
+}

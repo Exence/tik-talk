@@ -6,6 +6,7 @@ import { LayoutComponent } from './common-ui/layout/layout.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { ChatsPageRoutes } from './pages/chats-page/chats-page.routes';
 import { canActivateAuth } from '@tt/auth';
+import { ExperementPageComponent } from './pages/experements/experement.component';
 
 export const routes: Routes = [
   {
@@ -21,4 +22,5 @@ export const routes: Routes = [
     canActivate: [canActivateAuth],
   },
   { path: 'login', component: LoginPageComponent },
+  { path: 'experements', component: ExperementPageComponent },
 ];

@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom, Subscription, switchMap, tap, timer } from 'rxjs';
 import { ChatService } from '../../../data/services/chat.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { DatedMessages, Message } from '../../../data/interfaces/chat.interface';
+import { DatedMessages } from '../../../data/interfaces/chat.interface';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { ProfileService } from '../../../data/services/profile.service';
 import { RelativeDatePipe } from '../../../helpers/pipes/relative-date.pipe';
@@ -35,8 +35,6 @@ export class ChatWrapperComponent implements AfterViewInit {
   @ViewChild('chatMessages', { static: false })
   chatMessages!: ElementRef;
 
-  #currentDate: string | null = '';
-
   #route = inject(ActivatedRoute);
   #chatService = inject(ChatService);
 
@@ -51,7 +49,6 @@ export class ChatWrapperComponent implements AfterViewInit {
       if (this.#messagesTimerSubscription)
         this.#messagesTimerSubscription.unsubscribe();
 
-      this.#currentDate = '';
       this.#messagesTimerSubscription = this.#messagesTimer.subscribe(() => {
         this.getChatById(id)
       });
@@ -102,15 +99,6 @@ export class ChatWrapperComponent implements AfterViewInit {
       const container = this.chatMessages.nativeElement;
       container.scrollTop = container.scrollHeight;
     }
-  }
-
-  isNotTheSameDate(date: string | null) {
-    if (!(date === this.#currentDate)) {
-      this.#currentDate = date;
-      return true;
-    }
-
-    return false;
   }
 
   ngOnDestroy(): void {
