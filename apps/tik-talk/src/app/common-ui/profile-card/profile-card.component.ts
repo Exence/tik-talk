@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { ChatService } from '../../data/services/chat.service';
+import { ChatService } from '@tt/chats';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Profile } from '@tt/profiles';

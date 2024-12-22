@@ -6,8 +6,6 @@ import {
   Renderer2,
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { ChatsPanelComponent } from './chats-panel/chats-panel.component';
-import { ChatService } from '../../data/services/chat.service';
 import {
   auditTime,
   firstValueFrom,
@@ -15,6 +13,7 @@ import {
   Subject,
   takeUntil,
 } from 'rxjs';
+import { ChatsPanelComponent, ChatService } from '@tt/chats';
 
 @Component({
   selector: 'app-chats-page',

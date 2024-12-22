@@ -4,7 +4,7 @@ import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-h
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { ChatService } from '../../data/services/chat.service';
+import { ChatService } from '@tt/chats';
 import { AvatarUrlPipe } from '@tt/shared';
 import { PostFeedComponent, PostInputComponent, PostService, PostCreateDto } from '@tt/posts';
 import { SvgIconComponent } from '@tt/common-ui';

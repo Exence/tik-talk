@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { DatePipe } from '@angular/common';
-import { Message } from '../../../../data/interfaces/chat.interface';
+import { Message } from '../data/interfaces/chat.interface';
 import { CircleAvatarComponent } from '@tt/common-ui/src';
 import { AddTimezonePipe } from '@tt/shared';
 import { Profile, ProfileService } from '@tt/profiles';

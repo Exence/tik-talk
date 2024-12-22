@@ -2,8 +2,6 @@ import {
   Component,
   inject,
 } from '@angular/core';
-import { ChatBtnComponent } from './chat-btn/chat-btn.component';
-import { ChatService } from '../../../data/services/chat.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   map,
@@ -12,6 +10,8 @@ import {
 } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { SvgIconComponent } from '@tt/common-ui';
+import { ChatBtnComponent } from '../chat-btn/chat-btn.component';
+import { ChatService } from '../data/services/chat.service';
 
 @Component({
   selector: 'app-chats-panel',

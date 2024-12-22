@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
-import { MyChat } from '../../../../data/interfaces/chat.interface';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AddTimezonePipe, TimeOrDatePipe } from '@tt/shared';
 import { CircleAvatarComponent } from '@tt/common-ui';
+import { MyChat } from '../data/interfaces/chat.interface';
 
 @Component({
   selector: 'app-chat-btn',

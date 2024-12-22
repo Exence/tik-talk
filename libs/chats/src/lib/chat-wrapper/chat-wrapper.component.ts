@@ -6,16 +6,16 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { ChatHeaderComponent } from './chat-header/chat-header.component';
+import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom, Subscription, switchMap, tap, timer } from 'rxjs';
-import { ChatService } from '../../../data/services/chat.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { DatedMessages } from '../../../data/interfaces/chat.interface';
-import { ChatMessageComponent } from './chat-message/chat-message.component';
+import { DatedMessages } from '../data/interfaces/chat.interface';
+import { ChatMessageComponent } from '../chat-message/chat-message.component';
 import { PostInputComponent } from '@tt/posts';
 import { RelativeDatePipe } from '@tt/shared';
 import { ProfileService } from '@tt/profiles';
+import { ChatService } from '../data/services/chat.service';
 
 @Component({
   selector: 'app-chat-wrapper',
