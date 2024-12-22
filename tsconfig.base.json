@@ -18,9 +18,12 @@
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
     "paths": {
+      "@tt/*": ["libs/*"],
       "@tt/auth": ["libs/auth/src/index.ts"],
+      "@tt/posts": ["libs/posts/src/index.ts"],
+      "@tt/profiles": ["libs/profiles/src/index.ts"],
       "@tt/shared": ["libs/shared/src/index.ts"],
-      "@tt/*": ["libs/*"]
+      "@tt/common-ui": ["libs/common-ui/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."

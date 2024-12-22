@@ -7,15 +7,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ChatHeaderComponent } from './chat-header/chat-header.component';
-import { PostInputComponent } from '../../../common-ui/post-input/post-input.component';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom, Subscription, switchMap, tap, timer } from 'rxjs';
 import { ChatService } from '../../../data/services/chat.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { DatedMessages } from '../../../data/interfaces/chat.interface';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
-import { ProfileService } from '../../../data/services/profile.service';
-import { RelativeDatePipe } from '../../../helpers/pipes/relative-date.pipe';
+import { PostInputComponent } from '@tt/posts';
+import { RelativeDatePipe } from '@tt/shared';
+import { ProfileService } from '@tt/profiles';
 
 @Component({
   selector: 'app-chat-wrapper',

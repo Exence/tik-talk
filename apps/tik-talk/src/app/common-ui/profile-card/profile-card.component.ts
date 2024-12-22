@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
-import { Profile } from '../../data/interfaces/profile.interface';
-import { AvatarUrlPipe } from '../../helpers/pipes/avatar-url.pipe';
 import { ChatService } from '../../data/services/chat.service';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { Profile } from '@tt/profiles';
+import { AvatarUrlPipe } from '@tt/shared';
 
 @Component({
   selector: 'app-profile-card',

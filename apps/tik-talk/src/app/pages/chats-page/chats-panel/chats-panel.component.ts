@@ -1,26 +1,17 @@
 import {
   Component,
-  effect,
   inject,
-  OnDestroy,
-  OnInit,
-  signal,
 } from '@angular/core';
 import { ChatBtnComponent } from './chat-btn/chat-btn.component';
-import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
 import { ChatService } from '../../../data/services/chat.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
-  BehaviorSubject,
   map,
   startWith,
-  Subject,
   switchMap,
-  takeUntil,
-  tap,
 } from 'rxjs';
-import { MyChat } from '../../../data/interfaces/chat.interface';
 import { AsyncPipe } from '@angular/common';
+import { SvgIconComponent } from '@tt/common-ui';
 
 @Component({
   selector: 'app-chats-panel',

@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
-import { Profile } from '../../data/interfaces/profile.interface';
-import { AvatarUrlPipe } from '../../helpers/pipes/avatar-url.pipe';
-import { CircleAvatarComponent } from '../circle-avatar/circle-avatar.component';
+import { AvatarUrlPipe } from '@tt/shared';
+import { CircleAvatarComponent } from '@tt/common-ui';
+import { Profile } from '@tt/profiles';
 
 @Component({
   selector: 'app-profile-header',

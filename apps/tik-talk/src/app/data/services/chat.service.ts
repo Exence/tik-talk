@@ -8,8 +8,8 @@ import {
 } from '../interfaces/chat.interface';
 import { baseApiUrl } from '@tt/shared';
 import { firstValueFrom, map, tap } from 'rxjs';
-import { ProfileService } from './profile.service';
 import { DateTime } from 'luxon'
+import { ProfileService } from '@tt/profiles';
 
 @Injectable({
   providedIn: 'root',

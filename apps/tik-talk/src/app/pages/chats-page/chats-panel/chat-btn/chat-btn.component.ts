@@ -1,9 +1,8 @@
 import { Component, input } from '@angular/core';
 import { MyChat } from '../../../../data/interfaces/chat.interface';
-import { CircleAvatarComponent } from '../../../../common-ui/circle-avatar/circle-avatar.component';
-import { TimeOrDatePipe } from '../../../../helpers/pipes/time-or-date.pipe';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AddTimezonePipe } from '../../../../helpers/pipes/add-timezone.pipe';
+import { AddTimezonePipe, TimeOrDatePipe } from '@tt/shared';
+import { CircleAvatarComponent } from '@tt/common-ui';
 
 @Component({
   selector: 'app-chat-btn',
