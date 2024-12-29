@@ -17,7 +17,7 @@ fieldset {
 }
 
 .control-error {
-  display: block;
+  display: none;
   color: tomato;
 }
 
@@ -35,4 +35,8 @@ fieldset {
 
 .tt-input.ng-touched.ng-invalid {
   border: 1px solid tomato;
+}
+
+.ng-touched + .control-error {
+  display: block;
 }

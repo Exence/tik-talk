@@ -45,16 +45,12 @@
             type="text" 
             class="tt-input"
           >
-        </label>
-        @if(
-          reactiveForm.controls.personalData.controls.firstName.touched &&
-          reactiveForm.controls.personalData.controls.firstName.hasError('required')
-        ) {    
-          <span class="control-error">Имя обязательно</span>
-        }
-        
-      </div>
 
+          @if(reactiveForm.controls.personalData.controls.firstName.hasError('required')) {    
+            <span class="control-error">Имя обязательно</span>
+          }
+        </label>
+      </div>
       
       <div>
         <label>Фамилия:
@@ -63,13 +59,11 @@
             type="text" 
             class="tt-input"
           >
+
+          @if(reactiveForm.controls.personalData.controls.lastName.hasError('required')) {
+            <span class="control-error">Фамилия обязательна</span>
+          }
         </label>
-        @if(
-          reactiveForm.controls.personalData.controls.lastName.touched &&
-          reactiveForm.controls.personalData.controls.lastName.hasError('required')
-        ) {
-          <span class="control-error">Фамилия обязательна</span>
-        }
       </div>
 
       <div>
@@ -79,13 +73,11 @@
             type="date" 
             class="tt-input"
           >
+
+          @if(reactiveForm.controls.personalData.controls.birthday.hasError('required')) {
+            <span class="control-error">Введите корректную дату</span>
+          }
         </label>
-        @if(
-          reactiveForm.controls.personalData.controls.birthday.touched &&
-          reactiveForm.controls.personalData.controls.birthday.hasError('required')
-        ) {
-<span class="control-error">Введите корректную дату</span>
-}
       </div>
     </fieldset>
 
@@ -99,13 +91,11 @@
             type="email" 
             class="tt-input"
           >
+
+          @if(reactiveForm.controls.contacts.controls.email.hasError('required')) {
+            <span class="control-error">Введите корректный email</span>
+          }
         </label>
-        @if(
-          reactiveForm.controls.contacts.controls.email.touched &&
-          reactiveForm.controls.contacts.controls.email.hasError('required')
-        ) {
-          <span class="control-error">Введите корректный email</span>
-        }
       </div>
 
       <div>
@@ -116,8 +106,7 @@
             class="tt-input"
             [maskito]="phoneMask"
           >
-        </label>
-        @if(reactiveForm.controls.contacts.controls.phone.touched ) {
+
           @if (reactiveForm.controls.contacts.controls.phone.hasError('required')) {
             <span class="control-error">Номер телефона обязателен</span>
           }
@@ -126,8 +115,7 @@
               {{ reactiveForm.controls.contacts.controls.phone.getError('validatePhone')?.message }}
             </span>
           }
-        }
-        
+        </label>
       </div>
     </fieldset>
 
@@ -144,14 +132,11 @@
             <option [value]="countries.USA">США</option>
             <option [value]="countries.UK">Великобритания</option>
           </select>
+
+          @if(reactiveForm.controls.address.controls.country.hasError('required')) {
+            <span class="control-error">Выберите страну</span>
+          }
         </label>
-        
-        @if(
-          reactiveForm.controls.address.controls.country.touched &&
-          reactiveForm.controls.address.controls.country.hasError('required')
-        ) {
-<span class="control-error">Выберите страну</span>
-}
       </div>
       <div class="address__input">
         <div>
@@ -161,13 +146,11 @@
               type="text" 
               class="tt-input"
             >
+
+            @if(reactiveForm.controls.address.controls.city.hasError('required')) {
+              <span class="control-error">Введите город</span>
+            }
           </label>
-          @if(
-          reactiveForm.controls.address.controls.city.touched &&
-          reactiveForm.controls.address.controls.city.hasError('required')
-        ) {
-<span class="control-error">Введите город</span>
-}
         </div>
   
         <div>
@@ -177,13 +160,10 @@
               type="text" 
               class="tt-input"
             >
+            @if(reactiveForm.controls.address.controls.street.hasError('required')) {
+              <span class="control-error">Введите название улицы</span>
+            }
           </label>
-          @if(
-          reactiveForm.controls.address.controls.street.touched &&
-          reactiveForm.controls.address.controls.street.hasError('required')
-        ) {
-<span class="control-error">Введите название улицы</span>
-}
         </div>
         <div>
           <label>Дом:
@@ -192,13 +172,11 @@
               type="text" 
               class="tt-input"
             >
+
+            @if(reactiveForm.controls.address.controls.building.hasError('required')) {
+              <span class="control-error">Введите номер дома</span>
+            }
           </label>
-          @if(
-          reactiveForm.controls.address.controls.building.touched &&
-          reactiveForm.controls.address.controls.building.hasError('required')
-        ) {
-<span class="control-error">Введите номер дома</span>
-}
         </div>
 
         <div>
@@ -208,13 +186,11 @@
               type="text" 
               class="tt-input"
             >
+
+            @if(reactiveForm.controls.address.controls.apartment.hasError('required')) {
+              <span class="control-error">Введите номер квартиры</span>
+            }
           </label>
-          @if(
-          reactiveForm.controls.address.controls.apartment.touched &&
-          reactiveForm.controls.address.controls.apartment.hasError('required')
-        ) {
-<span class="control-error">Введите номер квартиры</span>
-}
         </div>
       </div>
       
@@ -264,12 +240,12 @@
             type="checkbox" 
           />
           Согласен с условиями
+          
+          @if(!reactiveForm.controls.terms.controls.termsAccepted.value) {
+            <span class="control-error">Вы должны принять условия</span>
+          }
         </label>
-        @if(
-          reactiveForm.controls.terms.controls.termsAccepted.touched &&
-          !reactiveForm.controls.terms.controls.termsAccepted.value) {
-          <span class="control-error">Вы должны принять условия</span>
-        }
+        
       </div>
     </fieldset>
 
