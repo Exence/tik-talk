@@ -7,6 +7,9 @@ import { ChatsPageRoutes } from './pages/chats-page/chats-page.routes';
 import { canActivateAuth } from '@tt/auth';
 import { ExperementPageComponent } from './pages/experements/experement.component';
 import { LayoutComponent } from '@tt/sidebar'
+import { ProfileEffects, profileFeature } from '@tt/profiles'
+import { provideEffects } from '@ngrx/effects';
+import { provideState } from '@ngrx/store';
 
 export const routes: Routes = [
   {
@@ -16,7 +19,14 @@ export const routes: Routes = [
       { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
       { path: 'profile/:id', component: ProfilePageComponent },
       { path: 'settings', component: SettingsPageComponent },
-      { path: 'search', component: SearchPageComponent },
+      { 
+        path: 'search', 
+        component: SearchPageComponent,
+        providers: [
+          provideState(profileFeature),
+          provideEffects(ProfileEffects)
+        ]
+      },
       { path: 'chats', loadChildren: () => ChatsPageRoutes },
     ],
     canActivate: [canActivateAuth],
