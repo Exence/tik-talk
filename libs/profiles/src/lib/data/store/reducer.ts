@@ -24,6 +24,15 @@ export const profileFeature = createFeature({
           profiles: payload.profiles
         }
       }
+    ),
+    on(
+      profileActions.saveFilters,
+      (state: ProfileState, payload) => {
+        return {
+          ...state,
+          profileFilters: payload.filters
+        }
+      }
     )
   )
 })

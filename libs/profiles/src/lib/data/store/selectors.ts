@@ -5,3 +5,8 @@ export const selectFilteredProfiles = createSelector(
   profileFeature.selectProfiles,
   (profiles) => profiles
 )
+
+export const selectSavedFilters = createSelector(
+  profileFeature.selectProfileFilters,
+  (filters) => filters
+)

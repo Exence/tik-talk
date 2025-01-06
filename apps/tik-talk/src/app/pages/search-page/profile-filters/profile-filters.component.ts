@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, startWith } from 'rxjs';
+import { debounceTime, firstValueFrom, startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { profileActions } from '@tt/profiles';
+import { profileActions, selectSavedFilters } from '@tt/profiles';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss',
 })
-export class ProfileFiltersComponent {
+export class ProfileFiltersComponent implements OnInit {
   fb = inject(FormBuilder);
   store$ = inject(Store)
 
@@ -30,7 +30,15 @@ export class ProfileFiltersComponent {
         debounceTime(300)
       )
       .subscribe(
-        (formValue) => this.store$.dispatch(profileActions.filterProfiles({ filters: formValue }))
+        (formValue) => {
+          this.store$.dispatch(profileActions.filterProfiles({ filters: formValue }))
+          this.store$.dispatch(profileActions.saveFilters({ filters: formValue }))
+        }
       );
+  }
+
+  async ngOnInit() {
+    const savedFilters = await firstValueFrom(this.store$.select(selectSavedFilters))
+    this.searchForm.patchValue(savedFilters)
   }
 }
