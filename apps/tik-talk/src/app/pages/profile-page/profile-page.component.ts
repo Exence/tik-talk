@@ -5,9 +5,10 @@ import { firstValueFrom, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ChatService } from '@tt/chats';
 import { AvatarUrlPipe } from '@tt/shared';
-import { PostFeedComponent, PostInputComponent, PostService, PostCreateDto } from '@tt/posts';
+import { PostFeedComponent, PostInputComponent, postActions, PostCreateDto } from '@tt/posts';
 import { SvgIconComponent } from '@tt/common-ui';
 import { ProfileService, ProfileHeaderComponent } from '@tt/profiles';
+import { Store } from '@ngrx/store';
 
 const angularimports = [AsyncPipe, RouterLink];
 
@@ -28,7 +29,6 @@ const appImports = [
 })
 export class ProfilePageComponent {
   #profileService = inject(ProfileService);
-  #postService = inject(PostService);
   #chatService = inject(ChatService);
 
   #route = inject(ActivatedRoute);
@@ -36,6 +36,7 @@ export class ProfilePageComponent {
 
   #me = this.#profileService.me;
   #me$ = toObservable(this.#me);
+  #store$ = inject(Store)
 
   isProfileMeUrl = signal<boolean>(false);
 
@@ -60,7 +61,7 @@ export class ProfilePageComponent {
       authorId: this.#me()!.id,
       communityId: null,
     };
-    firstValueFrom(this.#postService.createPost(post));
+    this.#store$.dispatch(postActions.createPost({post}))
   }
 
   async onCreateChat(id: number) {

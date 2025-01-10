@@ -5,9 +5,10 @@ import {
   inject,
   Renderer2,
 } from '@angular/core';
-import { PostService } from '../data/services/post.service';
 import { SinglePostComponent } from './single-post/single-post.component';
-import { auditTime, firstValueFrom, fromEvent, Subject, takeUntil } from 'rxjs';
+import { auditTime, fromEvent, Subject, takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { postActions, selectPosts } from '../data';
 
 @Component({
   selector: 'app-post-feed',
@@ -17,8 +18,8 @@ import { auditTime, firstValueFrom, fromEvent, Subject, takeUntil } from 'rxjs';
   styleUrl: './post-feed.component.scss',
 })
 export class PostFeedComponent implements AfterViewInit {
-  postService = inject(PostService);
-  posts = this.postService.posts;
+  store$ = inject(Store)
+  posts = this.store$.selectSignal(selectPosts);
 
   #destroy$ = new Subject<void>();
 
@@ -26,7 +27,7 @@ export class PostFeedComponent implements AfterViewInit {
   #r2 = inject(Renderer2);
 
   constructor() {
-    firstValueFrom(this.postService.getPosts());
+    this.store$.dispatch(postActions.fetchPosts())
   }
 
   ngAfterViewInit(): void {

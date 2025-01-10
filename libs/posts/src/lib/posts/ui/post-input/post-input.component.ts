@@ -8,8 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CircleAvatarComponent } from '../../../../../../common-ui/src/lib/circle-avatar/circle-avatar.component';
-import { SvgIconComponent } from '../../../../../../common-ui/src/lib/svg-icon/svg-icon.component';
+import { CircleAvatarComponent, SvgIconComponent } from '@tt/common-ui';
 import { ProfileService } from '@tt/profiles';
 
 @Component({

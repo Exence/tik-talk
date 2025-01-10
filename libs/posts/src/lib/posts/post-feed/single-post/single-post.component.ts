@@ -1,11 +1,8 @@
 import {
   Component,
-  ElementRef,
   inject,
   input,
-  Input,
   OnInit,
-  Renderer2,
   signal,
 } from '@angular/core';
 import {
@@ -13,13 +10,13 @@ import {
   CommentCreateDto,
   Comment,
 } from '../../data/interfaces/post.interface';
-import { CircleAvatarComponent } from '../../../../../../common-ui/src/lib/circle-avatar/circle-avatar.component';
-import { SvgIconComponent } from '../../../../../../common-ui/src/lib/svg-icon/svg-icon.component';
+import { CircleAvatarComponent } from '@tt/common-ui';
+import { SvgIconComponent } from '@tt/common-ui';
 import { PostInputComponent } from '../../ui/post-input/post-input.component';
 import { PostService } from '../../data/services/post.service';
 import { firstValueFrom, tap } from 'rxjs';
 import { SingleCommentComponent } from '../single-comment/single-comment.component';
-import { TimeAgoPipe } from '../../../../../../shared/src/lib/helpers/pipes/time-ago.pipe';
+import { TimeAgoPipe } from '@tt/shared';
 
 @Component({
   selector: 'app-single-post',

@@ -18,11 +18,7 @@ export class PostService {
   posts = signal<Post[]>([]);
 
   createPost(payload: PostCreateDto) {
-    return this.#httpClient.post<Post>(`${baseApiUrl}/post/`, payload).pipe(
-      switchMap(() => {
-        return this.getPosts();
-      })
-    );
+    return this.#httpClient.post<Post>(`${baseApiUrl}/post/`, payload)
   }
 
   getPosts() {
