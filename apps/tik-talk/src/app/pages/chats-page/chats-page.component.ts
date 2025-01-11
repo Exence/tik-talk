@@ -32,7 +32,6 @@ export class ChatsPageComponent {
   chats = this.#chatService.myChats;
 
   constructor() {
-    this.#chatService.connectToChatsWS();
     firstValueFrom(this.#chatService.getMyChats());
   }
 

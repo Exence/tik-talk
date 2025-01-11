@@ -8,13 +8,14 @@ import {
 } from '../interfaces/chat.interface';
 import { AuthService} from '@tt/auth'
 import { baseApiUrl } from '@tt/shared';
-import { firstValueFrom, map, tap } from 'rxjs';
+import { firstValueFrom, map, Observable, tap } from 'rxjs';
 import { DateTime } from 'luxon'
 import { ProfileService } from '@tt/profiles';
 import { ChatWSNativeService } from './chat-ws-native.service';
 import { ChatWSConnectionParams } from '../interfaces/chat-ws-service.interface';
 import { ChatWSMessage, ChatWSNewMessage } from '../interfaces/chat-ws-message.interface';
 import { isNewWSMessage } from '../interfaces/chat-ws-type-guards';
+import { ChatWSRXJSService } from './chat-ws-rxjs.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class ChatService {
   #chatApi = `${baseApiUrl}/chat`;
   #messageApi = `${baseApiUrl}/message`;
 
-  wsAdapter = new ChatWSNativeService()
+  wsAdapter = new ChatWSRXJSService()
 
   activeChatMessages = signal<DatedMessages[]>([]);
 
@@ -41,7 +42,7 @@ export class ChatService {
       messageHandler: this.messageHandler
     }
 
-    this.wsAdapter.connect(params)
+    return this.wsAdapter.connect(params)
   }
 
   messageHandler = (handeledMessage: ChatWSMessage) => {
