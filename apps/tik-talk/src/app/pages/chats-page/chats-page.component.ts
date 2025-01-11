@@ -22,7 +22,7 @@ import { ChatsPanelComponent, ChatService } from '@tt/chats';
   templateUrl: './chats-page.component.html',
   styleUrl: './chats-page.component.scss',
 })
-export class ChatsPageComponent implements OnInit {
+export class ChatsPageComponent {
   #chatService = inject(ChatService);
 
   #destroy$ = new Subject<void>();
@@ -31,7 +31,8 @@ export class ChatsPageComponent implements OnInit {
 
   chats = this.#chatService.myChats;
 
-  ngOnInit(): void {
+  constructor() {
+    this.#chatService.connectToChatsWS();
     firstValueFrom(this.#chatService.getMyChats());
   }
 

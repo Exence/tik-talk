@@ -6,10 +6,15 @@ import {
   DatedMessages,
   MyChat,
 } from '../interfaces/chat.interface';
+import { AuthService} from '@tt/auth'
 import { baseApiUrl } from '@tt/shared';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { DateTime } from 'luxon'
 import { ProfileService } from '@tt/profiles';
+import { ChatWSNativeService } from './chat-ws-native.service';
+import { ChatWSConnectionParams } from '../interfaces/chat-ws-service.interface';
+import { ChatWSMessage, ChatWSNewMessage } from '../interfaces/chat-ws-message.interface';
+import { isNewWSMessage } from '../interfaces/chat-ws-type-guards';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +22,37 @@ import { ProfileService } from '@tt/profiles';
 export class ChatService {
   #httpClient = inject(HttpClient);
   #profileService = inject(ProfileService);
+  #authService = inject(AuthService)
 
   #myId = this.#profileService.me()?.id;
   #chatApi = `${baseApiUrl}/chat`;
   #messageApi = `${baseApiUrl}/message`;
 
+  wsAdapter = new ChatWSNativeService()
+
+  activeChatMessages = signal<DatedMessages[]>([]);
+
   myChats = signal<MyChat[]>([]);
+
+  connectToChatsWS() {
+    const params: ChatWSConnectionParams = {
+      url: `${this.#chatApi}/ws`,
+      token: this.#authService.accessToken ?? '',
+      messageHandler: this.messageHandler
+    }
+
+    this.wsAdapter.connect(params)
+  }
+
+  messageHandler = (handeledMessage: ChatWSMessage) => {
+    if (!('action' in handeledMessage)) return
+    
+    if (isNewWSMessage(handeledMessage)) {
+      const message = this.#createChatMessageFromHandeledMessage(handeledMessage)
+      this.#updateActiveChatMessagesWithMessage(message)
+    }
+    
+  }
 
   getMyChats() {
     return this.#httpClient
@@ -36,9 +66,6 @@ export class ChatService {
 
   getChatById(chatId: number) {
     return this.#httpClient.get<Chat>(`${this.#chatApi}/${chatId}`).pipe(
-      tap(() => {
-        firstValueFrom(this.getMyChats());
-      }),
       map((chat) => {
         return {
           ...chat,
@@ -46,6 +73,10 @@ export class ChatService {
             chat.userFirst.id === this.#myId ? chat.userSecond : chat.userFirst,
           datedMessages: this.groupMessagesByDate(chat.messages?? [])
         };
+      }),
+      tap(chat => {
+        this.activeChatMessages.set(chat.datedMessages);
+        firstValueFrom(this.getMyChats());
       })
     );
   }
@@ -65,7 +96,7 @@ export class ChatService {
     const result: DatedMessages[] = []
     
     Object.entries(groupMessages).forEach(([date, messages]) => {
-      result.push({date: date, messages: messages})
+      result.push({ date, messages})
     })
 
     return result
@@ -80,5 +111,36 @@ export class ChatService {
       {},
       { params }
     );
+  }
+
+  #createChatMessageFromHandeledMessage(handeledMessage: ChatWSNewMessage) {
+    const message: Message = {
+      id: handeledMessage.data.id,
+      userFromId: handeledMessage.data.author,
+      personalChatId: handeledMessage.data.chat_id,
+      text: handeledMessage.data.message,
+      createdAt: handeledMessage.data.created_at,
+      isRead: false,
+      isMine: false
+    }
+
+    return message
+  }
+
+  #updateActiveChatMessagesWithMessage(message: Message) {
+    const messageDate = DateTime.fromFormat(message.createdAt, "yyyy-MM-dd HH:mm:ss").toISODate()?? 'No date';
+    const datedMessages = [...this.activeChatMessages()]
+
+    const index = datedMessages.findIndex(datedMessage => {
+      return datedMessage.date == messageDate
+    })
+
+    if (index == -1) {
+      datedMessages.push({ date: messageDate, messages: [message] })
+    } else {
+      datedMessages[index].messages.push(message)
+    }
+
+    this.activeChatMessages.set(datedMessages)  
   }
 }

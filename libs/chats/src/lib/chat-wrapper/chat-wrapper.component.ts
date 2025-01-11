@@ -39,21 +39,10 @@ export class ChatWrapperComponent implements AfterViewInit {
   #router = inject(Router)
   #chatService = inject(ChatService);
 
-  messages = signal<DatedMessages[]>([]);
+  messages = this.#chatService.activeChatMessages
   me = inject(ProfileService).me();
 
-  #messagesTimer = timer(2000, 5000);
-  #messagesTimerSubscription!: Subscription;
-
   activeChat$ = this.#route.params.pipe(
-    tap(({ id }) => {
-      if (this.#messagesTimerSubscription)
-        this.#messagesTimerSubscription.unsubscribe();
-
-      this.#messagesTimerSubscription = this.#messagesTimer.subscribe(() => {
-        this.getChatById(id)
-      });
-    }),
     switchMap(({ id }) => {
       if (id === 'new') {
         return this.#route.queryParams.pipe(
@@ -69,9 +58,7 @@ export class ChatWrapperComponent implements AfterViewInit {
 
         )
       }
-      return this.#chatService
-        .getChatById(id)
-        .pipe(tap((chat) => this.messages.set(chat.datedMessages ?? [])))
+      return this.#chatService.getChatById(id)
     }
       
     )
@@ -107,8 +94,8 @@ export class ChatWrapperComponent implements AfterViewInit {
   }
 
   async onSendMessage(chatId: number, text: string) {
-    await firstValueFrom(this.#chatService.sendMessage(chatId, text));
-    this.getChatById(chatId)
+    this.#chatService.wsAdapter.sendMessage(text, chatId);
+    this.scrollToBottom();
   }
 
   scrollToBottom() {
@@ -116,9 +103,5 @@ export class ChatWrapperComponent implements AfterViewInit {
       const container = this.chatMessages.nativeElement;
       container.scrollTop = container.scrollHeight;
     }
-  }
-
-  ngOnDestroy(): void {
-    this.#messagesTimerSubscription.unsubscribe();
   }
 }

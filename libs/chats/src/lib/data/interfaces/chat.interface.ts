@@ -24,7 +24,8 @@ export interface Message {
   text: string;
   createdAt: string;
   isRead: boolean;
-  updatedAt: string | null;
+  updatedAt?: string | null;
+  isMine?: boolean
 }
 
 export interface DatedMessages {
