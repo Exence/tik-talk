@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { catchError, firstValueFrom, throwError } from 'rxjs';
+import { catchError, finalize, firstValueFrom, Subscription, tap, throwError } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { SubscriberCardComponent } from '../subscriber-card/subscriber-card.component';
@@ -8,6 +8,7 @@ import { AvatarUrlPipe } from '@tt/shared';
 import { ProfileService } from '@tt/profiles';
 import { SvgIconComponent } from '@tt/common-ui'
 import { ChatService } from '@tt/chats';
+import { isErrorWSMessage } from '@tt/chats/src/lib/data/interfaces/chat-ws-type-guards';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,6 +27,8 @@ import { ChatService } from '@tt/chats';
 export class SidebarComponent {
   #profileService = inject(ProfileService);
   #chatService = inject(ChatService)
+  #destroyRef = inject(DestroyRef)
+
   me = this.#profileService.me;
 
   menuItems = [
@@ -49,10 +52,27 @@ export class SidebarComponent {
   subscribers$ = this.#profileService.getSubscribersShortList();
   unreadMessagesCount = this.#chatService.unreadMessagesCount
 
+  #wsConnection: Subscription = this.#getWSSubscription().subscribe()
+  #isWSReconnectNeeded = this.#chatService.isWSAdapterReconnectNeeded
+
   constructor() {
     firstValueFrom(this.#profileService.getMe());
-    this.#chatService.connectToChatsWS().pipe(
-      takeUntilDestroyed()
-    ).subscribe()
+    effect(() => {
+      if (this.#isWSReconnectNeeded()) {
+        this.#wsReconnection()
+      }
+    }, { allowSignalWrites: true })
+  }
+
+  #getWSSubscription() {
+    return this.#chatService.connectToChatsWS().pipe(
+      takeUntilDestroyed(this.#destroyRef)
+    )
+  }
+
+  #wsReconnection() {
+    this.#wsConnection.unsubscribe()
+    this.#wsConnection = this.#getWSSubscription().subscribe()
+    this.#isWSReconnectNeeded.set(false)
   }
 }

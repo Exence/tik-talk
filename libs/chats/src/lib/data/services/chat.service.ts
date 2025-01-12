@@ -8,10 +8,9 @@ import {
 } from '../interfaces/chat.interface';
 import { AuthService} from '@tt/auth'
 import { baseApiUrl } from '@tt/shared';
-import { firstValueFrom, map, Observable, tap } from 'rxjs';
+import { firstValueFrom, map, tap } from 'rxjs';
 import { DateTime } from 'luxon'
 import { ProfileService } from '@tt/profiles';
-import { ChatWSNativeService } from './chat-ws-native.service';
 import { ChatWSConnectionParams } from '../interfaces/chat-ws-service.interface';
 import { ChatWSMessage, ChatWSNewMessage } from '../interfaces/chat-ws-message.interface';
 import { isErrorWSMessage, isNewWSMessage, isUnreadWSMessage } from '../interfaces/chat-ws-type-guards';
@@ -30,6 +29,7 @@ export class ChatService {
   #messageApi = `${baseApiUrl}/message`;
 
   wsAdapter = new ChatWSRXJSService()
+  isWSAdapterReconnectNeeded = signal<boolean>(false)
 
   activeChatMessages = signal<DatedMessages[]>([]);
   unreadMessagesCount = signal<number>(0)
@@ -46,7 +46,7 @@ export class ChatService {
     return this.wsAdapter.connect(params)
   }
 
-  messageHandler = (handeledMessage: ChatWSMessage) => {
+  messageHandler = async (handeledMessage: ChatWSMessage) => {
     if (isNewWSMessage(handeledMessage)) {
       const message = this.#createChatMessageFromHandeledMessage(handeledMessage)
       this.#updateActiveChatMessagesWithMessage(message)
@@ -56,11 +56,12 @@ export class ChatService {
       this.unreadMessagesCount.set(handeledMessage.data.count)
     }
 
-    if (isErrorWSMessage(handeledMessage)) {
-      if (handeledMessage.message == 'Invalid token') {
-        this.wsAdapter.disconect()
-        this.connectToChatsWS()
-      }
+    if (isErrorWSMessage(handeledMessage) && handeledMessage.message === 'Invalid token') {
+      await firstValueFrom(this.#authService.getRefreshedToken())
+
+      this.wsAdapter.disconect()
+        
+      this.isWSAdapterReconnectNeeded.set(true)
     }
   }
 

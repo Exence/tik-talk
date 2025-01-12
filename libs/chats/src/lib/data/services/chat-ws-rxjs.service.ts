@@ -13,6 +13,7 @@ export class ChatWSRXJSService implements ChatWSService {
         url: params.url,
         protocol: [params.token]
       })
+      console.log(`WS is connected`);
     }
 
     return this.#socket.asObservable().pipe(
@@ -23,6 +24,8 @@ export class ChatWSRXJSService implements ChatWSService {
   }
 
   sendMessage(text: string, chatId: number) {
+    if (!this.#socket) return
+    
     this.#socket?.next({
       text,
       chat_id: chatId
@@ -30,7 +33,10 @@ export class ChatWSRXJSService implements ChatWSService {
   }
 
   disconect() {
+    if (!this.#socket) return
+
     this.#socket?.complete()
+    this.#socket = null
   }
   
 }
