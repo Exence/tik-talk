@@ -14,7 +14,7 @@ import { ProfileService } from '@tt/profiles';
 import { ChatWSNativeService } from './chat-ws-native.service';
 import { ChatWSConnectionParams } from '../interfaces/chat-ws-service.interface';
 import { ChatWSMessage, ChatWSNewMessage } from '../interfaces/chat-ws-message.interface';
-import { isNewWSMessage } from '../interfaces/chat-ws-type-guards';
+import { isErrorWSMessage, isNewWSMessage, isUnreadWSMessage } from '../interfaces/chat-ws-type-guards';
 import { ChatWSRXJSService } from './chat-ws-rxjs.service';
 
 @Injectable({
@@ -32,6 +32,7 @@ export class ChatService {
   wsAdapter = new ChatWSRXJSService()
 
   activeChatMessages = signal<DatedMessages[]>([]);
+  unreadMessagesCount = signal<number>(0)
 
   myChats = signal<MyChat[]>([]);
 
@@ -46,13 +47,21 @@ export class ChatService {
   }
 
   messageHandler = (handeledMessage: ChatWSMessage) => {
-    if (!('action' in handeledMessage)) return
-    
     if (isNewWSMessage(handeledMessage)) {
       const message = this.#createChatMessageFromHandeledMessage(handeledMessage)
       this.#updateActiveChatMessagesWithMessage(message)
     }
-    
+
+    if (isUnreadWSMessage(handeledMessage)) {
+      this.unreadMessagesCount.set(handeledMessage.data.count)
+    }
+
+    if (isErrorWSMessage(handeledMessage)) {
+      if (handeledMessage.message == 'Invalid token') {
+        this.wsAdapter.disconect()
+        this.connectToChatsWS()
+      }
+    }
   }
 
   getMyChats() {

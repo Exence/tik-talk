@@ -17,9 +17,12 @@
       @if (chat.message; as message) {
       <span>{{ message }}</span>
       }@else {
-      <span class="chat-btn-content__empty"
-        >У вас пока нет сообщений. Напишите первым!</span
-      >
+      <span class="chat-btn-content__empty">
+        У вас пока нет сообщений. Напишите первым!
+      </span>
+      }
+      @if (chat.unreadMessages) {
+        <span class="chat-btn-content__unread-count"> {{ chat.unreadMessages }}</span>
       }
     </div>
   </div>

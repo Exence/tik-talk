@@ -6,6 +6,7 @@
   align-items: start;
   border-bottom: var(--light-border);
   background-color: var(--dark-color);
+  text-decoration: none;
 
   &:hover,
   &:active,
@@ -36,11 +37,18 @@
 
 .chat-btn-content__preview {
   display: flex;
-  flex-direction: row;
   color: var(--light-color);
+  justify-content: space-between;
 }
 
 .chat-btn-content__empty {
   color: var(--light-transparent-color);
   font-style: italic;
+}
+
+.chat-btn-content__unread-count {
+  width: max-content;
+  padding: 1px 6px;
+  color: var(--dark-color);
+  background-color: var(--primary-color);
 }
