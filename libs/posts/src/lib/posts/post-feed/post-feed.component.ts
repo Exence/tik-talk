@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -16,9 +17,10 @@ import { postActions, selectPosts } from '../data';
   imports: [SinglePostComponent],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostFeedComponent implements AfterViewInit {
-  store$ = inject(Store)
+  store$ = inject(Store);
   posts = this.store$.selectSignal(selectPosts);
 
   #destroy$ = new Subject<void>();
@@ -27,7 +29,7 @@ export class PostFeedComponent implements AfterViewInit {
   #r2 = inject(Renderer2);
 
   constructor() {
-    this.store$.dispatch(postActions.fetchPosts())
+    this.store$.dispatch(postActions.fetchPosts());
   }
 
   ngAfterViewInit(): void {

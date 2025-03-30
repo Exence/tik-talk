@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 import { ProfileCardComponent } from '@tt/profiles';
@@ -9,5 +9,6 @@ import { ProfileCardComponent } from '@tt/profiles';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [RouterOutlet, ProfileCardComponent, JsonPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {}

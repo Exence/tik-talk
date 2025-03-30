@@ -1,4 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -14,6 +19,7 @@ import { Router } from '@angular/router';
   imports: [ReactiveFormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent {
   loginForm = new FormGroup({

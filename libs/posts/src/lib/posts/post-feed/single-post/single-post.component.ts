@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   input,
@@ -14,7 +15,7 @@ import { CircleAvatarComponent } from '@tt/common-ui';
 import { SvgIconComponent } from '@tt/common-ui';
 import { PostInputComponent } from '../../ui/post-input/post-input.component';
 import { PostService } from '../../data/services/post.service';
-import { firstValueFrom, tap } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { SingleCommentComponent } from '../single-comment/single-comment.component';
 import { TimeAgoPipe } from '@tt/shared';
 
@@ -30,6 +31,7 @@ import { TimeAgoPipe } from '@tt/shared';
   ],
   templateUrl: './single-post.component.html',
   styleUrl: './single-post.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SinglePostComponent implements OnInit {
   post = input<Post>();

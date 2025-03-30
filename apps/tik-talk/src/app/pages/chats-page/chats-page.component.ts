@@ -1,18 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
-  OnInit,
   Renderer2,
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import {
-  auditTime,
-  firstValueFrom,
-  fromEvent,
-  Subject,
-  takeUntil,
-} from 'rxjs';
+import { auditTime, firstValueFrom, fromEvent, Subject, takeUntil } from 'rxjs';
 import { ChatsPanelComponent, ChatService } from '@tt/chats';
 
 @Component({
@@ -21,6 +15,7 @@ import { ChatsPanelComponent, ChatService } from '@tt/chats';
   imports: [RouterOutlet, RouterLink, ChatsPanelComponent],
   templateUrl: './chats-page.component.html',
   styleUrl: './chats-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsPageComponent {
   #chatService = inject(ChatService);

@@ -1,13 +1,6 @@
-import {
-  Component,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  map,
-  startWith,
-  switchMap,
-} from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { SvgIconComponent } from '@tt/common-ui';
 import { ChatBtnComponent } from '../chat-btn/chat-btn.component';
@@ -19,6 +12,7 @@ import { ChatService } from '../data/services/chat.service';
   imports: [AsyncPipe, ChatBtnComponent, SvgIconComponent, ReactiveFormsModule],
   templateUrl: './chats-panel.component.html',
   styleUrl: './chats-panel.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsPanelComponent {
   chatService = inject(ChatService);

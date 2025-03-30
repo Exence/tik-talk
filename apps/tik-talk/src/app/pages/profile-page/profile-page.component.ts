@@ -1,11 +1,21 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ChatService } from '@tt/chats';
 import { AvatarUrlPipe } from '@tt/shared';
-import { PostFeedComponent, PostInputComponent, postActions, PostCreateDto } from '@tt/posts';
+import {
+  PostFeedComponent,
+  PostInputComponent,
+  postActions,
+  PostCreateDto,
+} from '@tt/posts';
 import { SvgIconComponent } from '@tt/common-ui';
 import { ProfileService, ProfileHeaderComponent } from '@tt/profiles';
 import { Store } from '@ngrx/store';
@@ -26,6 +36,7 @@ const appImports = [
   imports: [...angularimports, ...appImports],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfilePageComponent {
   #profileService = inject(ProfileService);
@@ -36,7 +47,7 @@ export class ProfilePageComponent {
 
   #me = this.#profileService.me;
   #me$ = toObservable(this.#me);
-  #store$ = inject(Store)
+  #store$ = inject(Store);
 
   isProfileMeUrl = signal<boolean>(false);
 
@@ -61,7 +72,7 @@ export class ProfilePageComponent {
       authorId: this.#me()!.id,
       communityId: null,
     };
-    this.#store$.dispatch(postActions.createPost({post}))
+    this.#store$.dispatch(postActions.createPost({ post }));
   }
 
   async onCreateChat(id: number) {

@@ -1,7 +1,7 @@
-import { Component, input } from '@angular/core';
-import { CircleAvatarComponent } from '../../../../../../common-ui/src/lib/circle-avatar/circle-avatar.component';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Comment } from '../../data/interfaces/post.interface';
-import { TimeAgoPipe } from '../../../../../../shared/src/lib/helpers/pipes/time-ago.pipe';
+import { CircleAvatarComponent } from '@tt/common-ui';
+import { TimeAgoPipe } from '@tt/shared';
 
 @Component({
   selector: 'app-single-comment',
@@ -9,6 +9,7 @@ import { TimeAgoPipe } from '../../../../../../shared/src/lib/helpers/pipes/time
   imports: [CircleAvatarComponent, TimeAgoPipe],
   templateUrl: './single-comment.component.html',
   styleUrl: './single-comment.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleCommentComponent {
   comment = input<Comment>();

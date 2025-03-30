@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   HostBinding,
   inject,
@@ -19,6 +20,7 @@ import { Profile } from '@tt/common-interfaces/profile';
   imports: [CircleAvatarComponent, DatePipe, AddTimezonePipe],
   templateUrl: './chat-message.component.html',
   styleUrl: './chat-message.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatMessageComponent {
   message = input.required<Message>();

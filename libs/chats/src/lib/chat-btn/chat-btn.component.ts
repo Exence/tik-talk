@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AddTimezonePipe, TimeOrDatePipe } from '@tt/shared';
 import { CircleAvatarComponent } from '@tt/common-ui';
@@ -16,6 +16,7 @@ import { MyChat } from '../data/interfaces/chat.interface';
   ],
   templateUrl: './chat-btn.component.html',
   styleUrl: './chat-btn.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatBtnComponent {
   chat = input.required<MyChat>();

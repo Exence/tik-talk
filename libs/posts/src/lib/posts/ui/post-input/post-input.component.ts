@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostBinding,
@@ -17,6 +18,7 @@ import { ProfileService } from '@tt/profiles';
   imports: [FormsModule, CircleAvatarComponent, SvgIconComponent],
   templateUrl: './post-input.component.html',
   styleUrl: './post-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostInputComponent {
   @Input() palaceholder = '';
