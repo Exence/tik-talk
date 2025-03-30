@@ -1,4 +1,19 @@
-.profile-card__wrapper {
+:host {
   display: grid;
   grid-gap: 8px;
+  grid-template-rows: max-content 1fr;
+  height: 100%;
+  min-height: 0;
+}
+
+.profile-card__wrapper {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  grid-gap: 8px;
+  padding-bottom: 20px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
