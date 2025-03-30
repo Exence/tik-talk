@@ -3,4 +3,6 @@ import { DndDirective } from './directives/dnd.directive'
 import { SearchLayoutComponent } from './search-layout/search-layout.component'
 import { SvgIconComponent } from './svg-icon/svg-icon.component'
 
+export * from './components'
+
 export { CircleAvatarComponent, DndDirective, SearchLayoutComponent, SvgIconComponent }
