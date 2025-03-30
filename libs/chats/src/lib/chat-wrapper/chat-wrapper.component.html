@@ -2,20 +2,17 @@
 <app-chat-header [companion]="chat.companion"></app-chat-header>
 <div class="chat-area">
   <div class="chat-messages" #chatMessages>
-    @if(messages().length) { 
-      @for (messageGroup of messages(); track messageGroup.date) {
-        <div class="chat-messages__date tt-control-label">
-          {{ messageGroup.date | relativeDatePipe }}
-        </div>
-        
-        @for (message of messageGroup.messages; track message.id;) {
-          <app-chat-message
-            [message]="message"
-            [profile]="message.userFromId === me!.id ? me! : chat.companion!"
-          ></app-chat-message>
-        } 
-      }
-    } @else {
+    @if(messages().length) { @for (messageGroup of messages(); track messageGroup.date) {
+    <div class="chat-messages__date tt-control-label">
+      {{ messageGroup.date | relativeDatePipe }}
+    </div>
+
+    @for (message of messageGroup.messages; track message.id;) {
+    <app-chat-message
+      [message]="message"
+      [profile]="message.userFromId === me!.id ? me! : chat.companion!"
+    ></app-chat-message>
+    } } } @else {
     <h4 class="medium-text chat-messages__empty">
       В данном чате пока нет сообщений...Напишите первым!
     </h4>

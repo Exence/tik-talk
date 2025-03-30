@@ -1,7 +1,5 @@
-import { ProfileService } from "./services/profile.service";
+import { ProfileService } from './services/profile.service'
 
-export * from "./store"
+export * from './store'
 
-export {
-  ProfileService
-}
+export { ProfileService }

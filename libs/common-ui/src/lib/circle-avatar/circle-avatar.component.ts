@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { AvatarUrlPipe } from '../../../../shared/src/lib/helpers/pipes/avatar-url.pipe';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
+import { AvatarUrlPipe } from '../../../../shared/src/lib/helpers/pipes/avatar-url.pipe'
 
 @Component({
   selector: 'app-circle-avatar',
@@ -7,8 +7,8 @@ import { AvatarUrlPipe } from '../../../../shared/src/lib/helpers/pipes/avatar-u
   imports: [AvatarUrlPipe],
   templateUrl: './circle-avatar.component.html',
   styleUrl: './circle-avatar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CircleAvatarComponent {
-  avatarUrl = input<string | null>(null);
+  avatarUrl = input<string | null>(null)
 }

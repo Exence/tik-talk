@@ -1,16 +1,11 @@
 @if (post(); as post) {
-<app-circle-avatar
-  class="size32"
-  [avatarUrl]="post.author.avatarUrl"
-></app-circle-avatar>
+<app-circle-avatar class="size32" [avatarUrl]="post.author.avatarUrl"></app-circle-avatar>
 
 <div class="post-feed">
   <div class="post">
     <div class="post-content">
       <div class="content-header">
-        <span class="bold-text"
-          >{{ post.author.firstName }} {{ post.author.lastName }}</span
-        >
+        <span class="bold-text">{{ post.author.firstName }} {{ post.author.lastName }}</span>
         <span class="medium-text content-header__time">{{
           post.createdAt | timeAgoPipe : post.updatedAt
         }}</span>

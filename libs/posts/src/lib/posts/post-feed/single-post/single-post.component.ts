@@ -1,23 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  OnInit,
-  signal,
-} from '@angular/core';
-import {
-  Post,
-  CommentCreateDto,
-  Comment,
-} from '../../data/interfaces/post.interface';
-import { CircleAvatarComponent } from '@tt/common-ui';
-import { SvgIconComponent } from '@tt/common-ui';
-import { PostInputComponent } from '../../ui/post-input/post-input.component';
-import { PostService } from '../../data/services/post.service';
-import { firstValueFrom } from 'rxjs';
-import { SingleCommentComponent } from '../single-comment/single-comment.component';
-import { TimeAgoPipe } from '@tt/shared';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit, signal } from '@angular/core'
+import { CircleAvatarComponent, SvgIconComponent } from '@tt/common-ui'
+import { TimeAgoPipe } from '@tt/shared'
+import { firstValueFrom } from 'rxjs'
+import { Comment, CommentCreateDto, Post } from '../../data/interfaces/post.interface'
+import { PostService } from '../../data/services/post.service'
+import { PostInputComponent } from '../../ui/post-input/post-input.component'
+import { SingleCommentComponent } from '../single-comment/single-comment.component'
 
 @Component({
   selector: 'app-single-post',
@@ -27,20 +15,20 @@ import { TimeAgoPipe } from '@tt/shared';
     SvgIconComponent,
     PostInputComponent,
     SingleCommentComponent,
-    TimeAgoPipe,
+    TimeAgoPipe
   ],
   templateUrl: './single-post.component.html',
   styleUrl: './single-post.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SinglePostComponent implements OnInit {
-  post = input<Post>();
-  comments = signal<Comment[]>([]);
+  post = input<Post>()
+  comments = signal<Comment[]>([])
 
-  postService = inject(PostService);
+  postService = inject(PostService)
 
   ngOnInit(): void {
-    this.comments.set(this.post()!.comments);
+    this.comments.set(this.post()!.comments)
   }
 
   async onCreateComment(text: string) {
@@ -48,11 +36,11 @@ export class SinglePostComponent implements OnInit {
       text: text,
       postId: this.post()!.id,
       authorId: null,
-      commentId: null,
-    };
-    await firstValueFrom(this.postService.createComment(comment));
-    firstValueFrom(this.postService.getCommenstByPostId(comment.postId)).then(
-      (res) => this.comments.set(res)
-    );
+      commentId: null
+    }
+    await firstValueFrom(this.postService.createComment(comment))
+    firstValueFrom(this.postService.getCommenstByPostId(comment.postId)).then((res) =>
+      this.comments.set(res)
+    )
   }
 }

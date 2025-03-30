@@ -1,16 +1,16 @@
-import { Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { ChatsPageRoutes } from './pages/chats-page/chats-page.routes';
-import { canActivateAuth } from '@tt/auth';
-import { ExperementPageComponent } from './pages/experements/experement.component';
-import { LayoutComponent } from '@tt/sidebar'
+import { Routes } from '@angular/router'
+import { provideEffects } from '@ngrx/effects'
+import { provideState } from '@ngrx/store'
+import { canActivateAuth } from '@tt/auth'
+import { PostEffects, postFeature } from '@tt/posts'
 import { ProfileEffects, profileFeature } from '@tt/profiles'
-import { provideEffects } from '@ngrx/effects';
-import { provideState } from '@ngrx/store';
-import { postFeature, PostEffects } from '@tt/posts';
+import { LayoutComponent } from '@tt/sidebar'
+import { ChatsPageRoutes } from './pages/chats-page/chats-page.routes'
+import { ExperementPageComponent } from './pages/experements/experement.component'
+import { LoginPageComponent } from './pages/login-page/login-page.component'
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component'
+import { SearchPageComponent } from './pages/search-page/search-page.component'
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component'
 
 export const routes: Routes = [
   {
@@ -18,26 +18,21 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
-      { path: 'profile/:id', 
+      {
+        path: 'profile/:id',
         component: ProfilePageComponent,
-        providers: [
-          provideState(postFeature),
-          provideEffects(PostEffects)
-        ]
+        providers: [provideState(postFeature), provideEffects(PostEffects)]
       },
       { path: 'settings', component: SettingsPageComponent },
-      { 
-        path: 'search', 
+      {
+        path: 'search',
         component: SearchPageComponent,
-        providers: [
-          provideState(profileFeature),
-          provideEffects(ProfileEffects)
-        ]
+        providers: [provideState(profileFeature), provideEffects(ProfileEffects)]
       },
-      { path: 'chats', loadChildren: () => ChatsPageRoutes },
+      { path: 'chats', loadChildren: () => ChatsPageRoutes }
     ],
-    canActivate: [canActivateAuth],
+    canActivate: [canActivateAuth]
   },
   { path: 'login', component: LoginPageComponent },
-  { path: 'experements', component: ExperementPageComponent },
-];
+  { path: 'experements', component: ExperementPageComponent }
+]

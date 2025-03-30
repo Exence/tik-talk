@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { DateTime } from 'luxon';
+import { Pipe, PipeTransform } from '@angular/core'
+import { DateTime } from 'luxon'
 
 @Pipe({
   name: 'addTimezonePipe',
@@ -7,8 +7,8 @@ import { DateTime } from 'luxon';
 })
 export class AddTimezonePipe implements PipeTransform {
   transform(value: string | null): string {
-    if (!value) return '';
+    if (!value) return ''
 
-    return DateTime.fromISO(value, { zone: 'UTC' }).toLocal().toISO()?? '';
+    return DateTime.fromISO(value, { zone: 'UTC' }).toLocal().toISO() ?? ''
   }
 }

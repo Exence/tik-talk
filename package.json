@@ -24,6 +24,7 @@
     "@ngrx/store": "^18.1.1",
     "luxon": "^3.5.0",
     "ngx-cookie-service": "^18.0.0",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

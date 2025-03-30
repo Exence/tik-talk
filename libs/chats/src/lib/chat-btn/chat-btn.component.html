@@ -1,13 +1,6 @@
 @if(chat(); as chat){
-<a
-  class="btn chat-btn"
-  [routerLink]="['/chats', chat.id]"
-  routerLinkActive="active-chat-btn"
->
-  <app-circle-avatar
-    class="size32"
-    [avatarUrl]="chat.userFrom.avatarUrl"
-  ></app-circle-avatar>
+<a class="btn chat-btn" [routerLink]="['/chats', chat.id]" routerLinkActive="active-chat-btn">
+  <app-circle-avatar class="size32" [avatarUrl]="chat.userFrom.avatarUrl"></app-circle-avatar>
   <div class="chat-btn-content medium-text">
     <div class="chat-btn-content__header">
       <span>{{ chat.userFrom.firstName }} {{ chat.userFrom.lastName }}</span>
@@ -17,12 +10,9 @@
       @if (chat.message; as message) {
       <span>{{ message }}</span>
       }@else {
-      <span class="chat-btn-content__empty">
-        У вас пока нет сообщений. Напишите первым!
-      </span>
-      }
-      @if (chat.unreadMessages) {
-        <span class="chat-btn-content__unread-count"> {{ chat.unreadMessages }}</span>
+      <span class="chat-btn-content__empty"> У вас пока нет сообщений. Напишите первым! </span>
+      } @if (chat.unreadMessages) {
+      <span class="chat-btn-content__unread-count"> {{ chat.unreadMessages }}</span>
       }
     </div>
   </div>

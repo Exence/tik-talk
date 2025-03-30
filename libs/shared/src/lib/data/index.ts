@@ -1,7 +1,4 @@
-import { Pageble } from "./interfaces/pageble.inerface";
-import { baseApiUrl } from "./config";
+import { baseApiUrl } from './config'
+import { Pageble } from './interfaces/pageble.inerface'
 
-export {
-  baseApiUrl,
-  Pageble
-}
+export { baseApiUrl, Pageble }

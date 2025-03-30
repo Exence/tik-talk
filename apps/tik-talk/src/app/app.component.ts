@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { JsonPipe } from '@angular/common';
-import { ProfileCardComponent } from '@tt/profiles';
+import { JsonPipe } from '@angular/common'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { ProfileCardComponent } from '@tt/profiles'
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ProfileFiltersComponent } from './profile-filters/profile-filters.component';
-import { ProfileCardComponent, selectFilteredProfiles } from '@tt/profiles';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { ProfileCardComponent, selectFilteredProfiles } from '@tt/profiles'
+import { ProfileFiltersComponent } from './profile-filters/profile-filters.component'
 
 @Component({
   selector: 'app-search-page',
@@ -9,10 +9,10 @@ import { Store } from '@ngrx/store';
   imports: [ProfileCardComponent, ProfileFiltersComponent],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchPageComponent {
-  store$ = inject(Store);
+  store$ = inject(Store)
 
-  profiles = this.store$.selectSignal(selectFilteredProfiles);
+  profiles = this.store$.selectSignal(selectFilteredProfiles)
 }

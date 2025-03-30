@@ -1,5 +1,5 @@
-@import 'fonts';
-@import 'margins';
+@import "fonts";
+@import "margins";
 
 :root {
   --dark-color: #000000;
@@ -24,7 +24,7 @@
 
 body {
   height: 100dvh;
-  font-family: 'JetBrains Mono', sans-serif;
+  font-family: "JetBrains Mono", sans-serif;
   background: var(--dark-color);
   color: var(--light-color);
   background-image: url(/assets/imgs/background.jpg);
@@ -75,7 +75,7 @@ body {
   position: relative;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     z-index: -1;
     bottom: -4px;
@@ -112,14 +112,14 @@ body {
 }
 
 .medium-text {
-  font-family: 'JetBrains Mono', sans-serif;
+  font-family: "JetBrains Mono", sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
 }
 
 .bold-text {
-  font-family: 'JetBrains Mono', sans-serif;
+  font-family: "JetBrains Mono", sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 21px;
@@ -150,7 +150,7 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
-  font-family: 'JetBrains Mono', sans-serif;
+  font-family: "JetBrains Mono", sans-serif;
   color: var(--light-color);
 }
 
@@ -169,7 +169,7 @@ body {
 }
 
 .tt-form-input {
-  font-family: 'JetBrains Mono', sans-serif;
+  font-family: "JetBrains Mono", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

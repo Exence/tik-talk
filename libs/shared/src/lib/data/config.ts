@@ -1,1 +1,1 @@
-export const baseApiUrl = 'https://icherniakov.ru/yt-course';
+export const baseApiUrl = 'https://icherniakov.ru/yt-course'

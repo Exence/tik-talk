@@ -1,11 +1,4 @@
-import { Chat, MyChat, Message, DatedMessages,MessageCreateDto } from "./interfaces/chat.interface";
-import { ChatService } from "./services/chat.service";
+import { Chat, DatedMessages, Message, MessageCreateDto, MyChat } from './interfaces/chat.interface'
+import { ChatService } from './services/chat.service'
 
-export {
-  Chat,
-  MyChat,
-  Message,
-  DatedMessages,
-  MessageCreateDto,
-  ChatService
-}
+export { Chat, ChatService, DatedMessages, Message, MessageCreateDto, MyChat }

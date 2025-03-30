@@ -1,5 +1,5 @@
-import { MaskitoOptions } from "@maskito/core"
-import {maskitoWithPlaceholder} from '@maskito/kit';
+import { MaskitoOptions } from '@maskito/core'
+import { maskitoWithPlaceholder } from '@maskito/kit'
 
 export const phoneMaskOption = {
   ...maskitoWithPlaceholder('+7 (XXX) XXX-XX-XX'),
@@ -21,6 +21,6 @@ export const phoneMaskOption = {
     /\d/,
     '-',
     /\d/,
-    /\d/,
-],
+    /\d/
+  ]
 } satisfies MaskitoOptions

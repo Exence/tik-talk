@@ -17,10 +17,7 @@
 <main class="profile-page__body">
   <div>
     @if (isProfileMeUrl()){
-    <app-post-input
-      palaceholder="Напишите что-нибудь"
-      (send)="onSendPost($event)"
-    ></app-post-input>
+    <app-post-input palaceholder="Напишите что-нибудь" (send)="onSendPost($event)"></app-post-input>
 
     <app-post-feed></app-post-feed>
     }
@@ -30,14 +27,8 @@
 
     <div class="subscribers-wrapper mb32">
       @for (subscriber of subscribers$ | async; track subscriber.id) {
-      <a
-        class="subscriber-avatar-btn"
-        [routerLink]="['/profile', subscriber.id]"
-      >
-        <img
-          [src]="subscriber.avatarUrl | avatarUrlPipe"
-          [alt]="subscriber.username"
-        />
+      <a class="subscriber-avatar-btn" [routerLink]="['/profile', subscriber.id]">
+        <img [src]="subscriber.avatarUrl | avatarUrlPipe" [alt]="subscriber.username" />
       </a>
       }
 

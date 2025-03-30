@@ -1,11 +1,11 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core'
+import { provideRouter } from '@angular/router'
 
-import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authTokenInterceptor } from '@tt/auth';
-import { provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
+import { provideHttpClient, withInterceptors } from '@angular/common/http'
+import { provideEffects } from '@ngrx/effects'
+import { provideStore } from '@ngrx/store'
+import { authTokenInterceptor } from '@tt/auth'
+import { routes } from './app.routes'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +14,5 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authTokenInterceptor])),
     provideStore(),
     provideEffects()
-  ],
-};
+  ]
+}

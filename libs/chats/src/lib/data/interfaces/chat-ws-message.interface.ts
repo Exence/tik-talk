@@ -12,12 +12,12 @@ export interface ChatWSUnreadMessage extends ChatWSMessageBase {
 export interface ChatWSNewMessage extends ChatWSMessageBase {
   action: 'message'
   data: {
-      id: number
-      message: string
-      chat_id: number
-      created_at: string
-      author: number
-    }
+    id: number
+    message: string
+    chat_id: number
+    created_at: string
+    author: number
+  }
 }
 
 export interface ChatWSErrorMessage extends ChatWSMessageBase {
@@ -29,4 +29,8 @@ export interface ChatWSSendMessage {
   chat_id: number
 }
 
-export type ChatWSMessage = ChatWSUnreadMessage | ChatWSNewMessage | ChatWSErrorMessage | ChatWSSendMessage
+export type ChatWSMessage =
+  | ChatWSUnreadMessage
+  | ChatWSNewMessage
+  | ChatWSErrorMessage
+  | ChatWSSendMessage

@@ -1,43 +1,37 @@
-import {
-  Directive,
-  EventEmitter,
-  HostBinding,
-  HostListener,
-  Output,
-} from '@angular/core';
+import { Directive, EventEmitter, HostBinding, HostListener, Output } from '@angular/core'
 
 @Directive({
   selector: '[dnd]',
-  standalone: true,
+  standalone: true
 })
 export class DndDirective {
-  @Output() fileDropped: EventEmitter<File> = new EventEmitter<File>();
+  @Output() fileDropped: EventEmitter<File> = new EventEmitter<File>()
 
   @HostBinding('class.fileover')
-  fileover = false;
+  fileover = false
 
   @HostListener('dragover', ['$event'])
   onDragOver(event: DragEvent) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault()
+    event.stopPropagation()
 
-    this.fileover = true;
+    this.fileover = true
   }
 
   @HostListener('dragleave', ['$event'])
   onDragLeave(event: DragEvent) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault()
+    event.stopPropagation()
 
-    this.fileover = false;
+    this.fileover = false
   }
 
   @HostListener('drop', ['$event'])
   onDrop(event: DragEvent) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault()
+    event.stopPropagation()
 
-    this.fileover = false;
-    this.fileDropped.emit(event.dataTransfer?.files[0]);
+    this.fileover = false
+    this.fileDropped.emit(event.dataTransfer?.files[0])
   }
 }

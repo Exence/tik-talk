@@ -1,81 +1,67 @@
 <div class="form-wrapper">
   <!-- Template -->
   <form (ngSubmit)="onTemplateSubmit($event)">
-    <h2 class="h2">Template Driven Form<br>(Шаблонная форма)</h2>
-    <input 
-      type="text" 
+    <h2 class="h2">Template Driven Form<br />(Шаблонная форма)</h2>
+    <input
+      type="text"
       class="tt-input"
       name="firstName"
       [ngModel]="person.firstName"
       (ngModelChange)="onChanges($event)"
-    >
-    <input 
-      type="text" 
+    />
+    <input
+      type="text"
       class="tt-input"
       name="lastName"
       theGreatest
       [(ngModel)]="person.lastName"
       #lastNameControl="ngModel"
-    >
+    />
     @if(lastNameControl.hasError('theGreatest')){
-      <span class="control-error">{{ lastNameControl.getError('theGreatest').message }}</span>
+    <span class="control-error">{{ lastNameControl.getError("theGreatest").message }}</span>
     }
     <div ngModelGroup="address">
-      <input 
-        type="text" 
-        class="tt-input"
-        name="street"
-        [(ngModel)]="person.address.street"
-      >
+      <input type="text" class="tt-input" name="street" [(ngModel)]="person.address.street" />
     </div>
-    <pre>{{person | json}}</pre>
+    <pre>{{ person | json }}</pre>
     <button class="btn btn-shadow" type="submit">Submit</button>
   </form>
 
   <!-- Reactive -->
   <form [formGroup]="reactiveForm" (ngSubmit)="onReactiveSubmit()">
-    <h2 class="h2">Reactive Form<br>(Реактивная форма)</h2>
+    <h2 class="h2">Reactive Form<br />(Реактивная форма)</h2>
     <fieldset formGroupName="personalData">
       <legend>Личные данные</legend>
 
       <div>
-        <label>Имя:
-          <input 
-            formControlName="firstName"
-            type="text" 
-            class="tt-input"
-          >
+        <label
+          >Имя:
+          <input formControlName="firstName" type="text" class="tt-input" />
 
-          @if(reactiveForm.controls.personalData.controls.firstName.hasError('required')) {    
-            <span class="control-error">Имя обязательно</span>
+          @if(reactiveForm.controls.personalData.controls.firstName.hasError('required')) {
+          <span class="control-error">Имя обязательно</span>
           }
         </label>
       </div>
-      
+
       <div>
-        <label>Фамилия:
-          <input 
-            formControlName="lastName"
-            type="text" 
-            class="tt-input"
-          >
+        <label
+          >Фамилия:
+          <input formControlName="lastName" type="text" class="tt-input" />
 
           @if(reactiveForm.controls.personalData.controls.lastName.hasError('required')) {
-            <span class="control-error">Фамилия обязательна</span>
+          <span class="control-error">Фамилия обязательна</span>
           }
         </label>
       </div>
 
       <div>
-        <label>Дата рождения:
-          <input  
-            formControlName="birthday"
-            type="date" 
-            class="tt-input"
-          >
+        <label
+          >Дата рождения:
+          <input formControlName="birthday" type="date" class="tt-input" />
 
           @if(reactiveForm.controls.personalData.controls.birthday.hasError('required')) {
-            <span class="control-error">Введите корректную дату</span>
+          <span class="control-error">Введите корректную дату</span>
           }
         </label>
       </div>
@@ -85,35 +71,27 @@
       <legend>Контактные данные</legend>
 
       <div>
-        <label>Электронная почта:
-          <input  
-            formControlName="email"
-            type="email" 
-            class="tt-input"
-          >
+        <label
+          >Электронная почта:
+          <input formControlName="email" type="email" class="tt-input" />
 
           @if(reactiveForm.controls.contacts.controls.email.hasError('required')) {
-            <span class="control-error">Введите корректный email</span>
+          <span class="control-error">Введите корректный email</span>
           }
         </label>
       </div>
 
       <div>
-        <label>Номер телефона:
-          <input  
-            formControlName="phone"
-            type="tel" 
-            class="tt-input"
-            [maskito]="phoneMask"
-          >
+        <label
+          >Номер телефона:
+          <input formControlName="phone" type="tel" class="tt-input" [maskito]="phoneMask" />
 
           @if (reactiveForm.controls.contacts.controls.phone.hasError('required')) {
-            <span class="control-error">Номер телефона обязателен</span>
-          }
-          @if (reactiveForm.controls.contacts.controls.phone.hasError('validatePhone')) {
-            <span class="control-error">
-              {{ reactiveForm.controls.contacts.controls.phone.getError('validatePhone')?.message }}
-            </span>
+          <span class="control-error">Номер телефона обязателен</span>
+          } @if (reactiveForm.controls.contacts.controls.phone.hasError('validatePhone')) {
+          <span class="control-error">
+            {{ reactiveForm.controls.contacts.controls.phone.getError("validatePhone")?.message }}
+          </span>
           }
         </label>
       </div>
@@ -122,11 +100,9 @@
     <fieldset formGroupName="address">
       <legend>Адрес</legend>
       <div>
-        <label>Страна:
-          <select 
-            class="tt-input" 
-            formControlName="country"
-          >
+        <label
+          >Страна:
+          <select class="tt-input" formControlName="country">
             <option value="" disabled>Выберите страну</option>
             <option [value]="countries.RU">Россия</option>
             <option [value]="countries.USA">США</option>
@@ -134,97 +110,73 @@
           </select>
 
           @if(reactiveForm.controls.address.controls.country.hasError('required')) {
-            <span class="control-error">Выберите страну</span>
+          <span class="control-error">Выберите страну</span>
           }
         </label>
       </div>
       <div class="address__input">
         <div>
-          <label>Город:
-            <input  
-              formControlName="city"
-              type="text" 
-              class="tt-input"
-            >
+          <label
+            >Город:
+            <input formControlName="city" type="text" class="tt-input" />
 
             @if(reactiveForm.controls.address.controls.city.hasError('required')) {
-              <span class="control-error">Введите город</span>
+            <span class="control-error">Введите город</span>
             }
           </label>
         </div>
-  
+
         <div>
-          <label>Улица:
-            <input  
-              formControlName="street"
-              type="text" 
-              class="tt-input"
-            >
+          <label
+            >Улица:
+            <input formControlName="street" type="text" class="tt-input" />
             @if(reactiveForm.controls.address.controls.street.hasError('required')) {
-              <span class="control-error">Введите название улицы</span>
+            <span class="control-error">Введите название улицы</span>
             }
           </label>
         </div>
         <div>
-          <label>Дом:
-            <input  
-              formControlName="building"
-              type="text" 
-              class="tt-input"
-            >
+          <label
+            >Дом:
+            <input formControlName="building" type="text" class="tt-input" />
 
             @if(reactiveForm.controls.address.controls.building.hasError('required')) {
-              <span class="control-error">Введите номер дома</span>
+            <span class="control-error">Введите номер дома</span>
             }
           </label>
         </div>
 
         <div>
-          <label>Квартира:
-            <input  
-              formControlName="apartment"
-              type="text" 
-              class="tt-input"
-            >
+          <label
+            >Квартира:
+            <input formControlName="apartment" type="text" class="tt-input" />
 
             @if(reactiveForm.controls.address.controls.apartment.hasError('required')) {
-              <span class="control-error">Введите номер квартиры</span>
+            <span class="control-error">Введите номер квартиры</span>
             }
           </label>
         </div>
       </div>
-      
     </fieldset>
 
     <fieldset formGroupName="additionalContacts">
       <legend>Дополнительные контакты</legend>
       <div>
         @for(contact of reactiveForm.controls.additionalContacts.controls; track contact){
-          <div [formGroup]="contact">
-            <label>Имя контакта:
-              <input  
-                formControlName="name"
-                type="text" 
-                class="tt-input"
-              >
-            </label>
+        <div [formGroup]="contact">
+          <label
+            >Имя контакта:
+            <input formControlName="name" type="text" class="tt-input" />
+          </label>
 
-            <label>Телефон:
-              <input  
-                formControlName="phone"
-                type="tel" 
-                class="tt-input"
-                [maskito]="phoneMask"
-              >
-            </label>
+          <label
+            >Телефон:
+            <input formControlName="phone" type="tel" class="tt-input" [maskito]="phoneMask" />
+          </label>
 
-            <button 
-              type="button" 
-              class="btn"
-              (click)="onRemoveContact($index)"
-            >-</button>
+          <button type="button" class="btn" (click)="onRemoveContact($index)">-</button>
         </div>
-      }
+        }
 
         <button type="button" class="btn" (click)="onAddContact()">+</button>
       </div>
@@ -235,17 +187,11 @@
 
       <div>
         <label>
-          <input  
-            formControlName="termsAccepted"
-            type="checkbox" 
-          />
-          Согласен с условиями
-          
-          @if(!reactiveForm.controls.terms.controls.termsAccepted.value) {
-            <span class="control-error">Вы должны принять условия</span>
+          <input formControlName="termsAccepted" type="checkbox" />
+          Согласен с условиями @if(!reactiveForm.controls.terms.controls.termsAccepted.value) {
+          <span class="control-error">Вы должны принять условия</span>
           }
         </label>
-        
       </div>
     </fieldset>
 
@@ -254,5 +200,4 @@
       <button type="button" class="btn" (click)="onReactiveReset()">Сбросить</button>
     </div>
   </form>
-
 </div>

@@ -4,20 +4,16 @@
   <ul class="main-menu-list">
     @for (menuItem of menuItems; track $index) {
     <li>
-      <a
-        class="menu-item"
-        [routerLink]="[menuItem.link]"
-        routerLinkActive="active"
-      >
+      <a class="menu-item" [routerLink]="[menuItem.link]" routerLinkActive="active">
         <svg [icon]="menuItem.icon"></svg>
         <div class="menu-item_label">
           <span>
             {{ menuItem.label }}
           </span>
           @if(menuItem.link === '/chats' && unreadMessagesCount()) {
-            <span class="menu-item_label__uread-count">
-              {{ unreadMessagesCount() }}
-            </span>
+          <span class="menu-item_label__uread-count">
+            {{ unreadMessagesCount() }}
+          </span>
           }
         </div>
       </a>

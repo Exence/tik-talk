@@ -17,7 +17,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
-    "paths": {  
+    "paths": {
       "@tt/auth": ["libs/auth/src/index.ts"],
       "@tt/chats": ["libs/chats/src/index.ts"],
       "@tt/common-ui": ["libs/common-ui/src/index.ts"],

@@ -1,5 +1,3 @@
-import { PostFeedComponent } from "./post-feed.component";
+import { PostFeedComponent } from './post-feed.component'
 
-export {
-  PostFeedComponent
-}
+export { PostFeedComponent }

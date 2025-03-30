@@ -1,78 +1,75 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { catchError, tap, throwError } from 'rxjs';
-import { Token } from './auth.interfaces';
-import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'
+import { Injectable, inject } from '@angular/core'
+import { Router } from '@angular/router'
 import { baseApiUrl } from '@tt/shared'
+import { CookieService } from 'ngx-cookie-service'
+import { catchError, tap, throwError } from 'rxjs'
+import { Token } from './auth.interfaces'
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
+  accessToken: string | null = null
+  refreshToken: string | null = null
 
-  accessToken: string | null = null;
-  refreshToken: string | null = null;
-
-  cookieService = inject(CookieService);
-  router = inject(Router);
+  cookieService = inject(CookieService)
+  router = inject(Router)
 
   isAuth() {
     if (!this.accessToken) {
-      this.accessToken = this.cookieService.get('accessToken');
-      this.refreshToken = this.cookieService.get('refreshToken');
+      this.accessToken = this.cookieService.get('accessToken')
+      this.refreshToken = this.cookieService.get('refreshToken')
     }
-    return !!this.accessToken;
+    return !!this.accessToken
   }
 
-  private httpClient = inject(HttpClient);
-  private baseExternalUrl = `${baseApiUrl}/auth`;
+  private httpClient = inject(HttpClient)
+  private baseExternalUrl = `${baseApiUrl}/auth`
 
   getAuthToken(payload: { username: string; password: string }) {
-    const fd = new FormData();
+    const fd = new FormData()
 
-    fd.append('username', payload.username);
-    fd.append('password', payload.password);
+    fd.append('username', payload.username)
+    fd.append('password', payload.password)
 
-    return this.httpClient
-      .post<Token>(`${this.baseExternalUrl}/token`, fd)
-      .pipe(
-        tap((token) => {
-          this.saveTokens(token);
-        })
-      );
+    return this.httpClient.post<Token>(`${this.baseExternalUrl}/token`, fd).pipe(
+      tap((token) => {
+        this.saveTokens(token)
+      })
+    )
   }
 
   getRefreshedToken() {
     return this.httpClient
       .post<Token>(`${this.baseExternalUrl}/refresh`, {
-        refresh_token: this.refreshToken,
+        refresh_token: this.refreshToken
       })
       .pipe(
         tap((token) => {
-          this.saveTokens(token);
+          this.saveTokens(token)
         }),
         catchError((err) => {
-          this.logout();
-          return throwError(err);
+          this.logout()
+          return throwError(err)
         })
-      );
+      )
   }
 
   saveTokens(token: Token) {
-    this.accessToken = token.access_token;
-    this.refreshToken = token.refresh_token;
+    this.accessToken = token.access_token
+    this.refreshToken = token.refresh_token
 
-    this.cookieService.set('accessToken', token.access_token);
-    this.cookieService.set('refreshToken', token.refresh_token);
+    this.cookieService.set('accessToken', token.access_token)
+    this.cookieService.set('refreshToken', token.refresh_token)
   }
 
   logout() {
-    this.accessToken = null;
-    this.refreshToken = null;
+    this.accessToken = null
+    this.refreshToken = null
 
-    this.cookieService.delete('accessToken');
-    this.cookieService.delete('refreshToken');
-    this.router.navigate(['/login']);
+    this.cookieService.delete('accessToken')
+    this.cookieService.delete('refreshToken')
+    this.router.navigate(['/login'])
   }
 }

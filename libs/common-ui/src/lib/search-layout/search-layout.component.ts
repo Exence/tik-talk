@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-search-layout',
@@ -7,6 +7,6 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './search-layout.component.html',
   styleUrl: './search-layout.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchLayoutComponent {}
