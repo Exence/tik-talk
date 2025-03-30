@@ -3,7 +3,7 @@ import { Profile } from '@tt/common-interfaces/profile'
 import { CircleAvatarComponent } from '@tt/common-ui'
 
 @Component({
-  selector: 'app-chat-header',
+  selector: 'tt-chat-header',
   standalone: true,
   imports: [CircleAvatarComponent],
   templateUrl: './chat-header.component.html',

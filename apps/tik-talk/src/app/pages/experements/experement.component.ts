@@ -34,7 +34,7 @@ const validatePhone: ValidatorFn = (control: AbstractControl) => {
 }
 
 @Component({
-  selector: 'app-experement-page',
+  selector: 'tt-experement-page',
   standalone: true,
   imports: [
     FormsModule,

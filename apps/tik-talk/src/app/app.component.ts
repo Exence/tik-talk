@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router'
 import { ProfileCardComponent } from '@tt/profiles'
 
 @Component({
-  selector: 'app-root',
+  selector: 'tt-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

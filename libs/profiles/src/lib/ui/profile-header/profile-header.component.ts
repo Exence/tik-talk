@@ -3,7 +3,7 @@ import { Profile } from '@tt/common-interfaces/profile'
 import { CircleAvatarComponent } from '@tt/common-ui'
 
 @Component({
-  selector: 'app-profile-header',
+  selector: 'tt-profile-header',
   standalone: true,
   imports: [CircleAvatarComponent],
   templateUrl: './profile-header.component.html',

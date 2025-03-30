@@ -4,7 +4,7 @@ import { ProfileCardComponent, selectFilteredProfiles } from '@tt/profiles'
 import { ProfileFiltersComponent } from './profile-filters/profile-filters.component'
 
 @Component({
-  selector: 'app-search-page',
+  selector: 'tt-search-page',
   standalone: true,
   imports: [ProfileCardComponent, ProfileFiltersComponent],
   templateUrl: './search-page.component.html',

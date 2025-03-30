@@ -12,7 +12,7 @@ import { postActions, selectPosts } from '../data'
 import { SinglePostComponent } from './single-post/single-post.component'
 
 @Component({
-  selector: 'app-post-feed',
+  selector: 'tt-post-feed',
   standalone: true,
   imports: [SinglePostComponent],
   templateUrl: './post-feed.component.html',

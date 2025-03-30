@@ -6,7 +6,7 @@ import { profileActions, selectSavedFilters } from '@tt/profiles'
 import { debounceTime, firstValueFrom, startWith } from 'rxjs'
 
 @Component({
-  selector: 'app-profile-filters',
+  selector: 'tt-profile-filters',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './profile-filters.component.html',

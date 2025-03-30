@@ -5,7 +5,7 @@ import { AddTimezonePipe, TimeOrDatePipe } from '@tt/shared'
 import { MyChat } from '../data/interfaces/chat.interface'
 
 @Component({
-  selector: 'app-chat-btn',
+  selector: 'tt-chat-btn',
   standalone: true,
   imports: [AddTimezonePipe, CircleAvatarComponent, TimeOrDatePipe, RouterLink, RouterLinkActive],
   templateUrl: './chat-btn.component.html',

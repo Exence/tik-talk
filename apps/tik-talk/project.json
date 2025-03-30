@@ -9,7 +9,7 @@
     }
   },
   "sourceRoot": "apps/tik-talk/src",
-  "prefix": "app",
+  "prefix": "tt",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",

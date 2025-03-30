@@ -8,7 +8,7 @@ import { PostInputComponent } from '../../ui/post-input/post-input.component'
 import { SingleCommentComponent } from '../single-comment/single-comment.component'
 
 @Component({
-  selector: 'app-single-post',
+  selector: 'tt-single-post',
   standalone: true,
   imports: [
     CircleAvatarComponent,

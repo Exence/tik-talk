@@ -7,7 +7,7 @@ import { ChatBtnComponent } from '../chat-btn/chat-btn.component'
 import { ChatService } from '../data/services/chat.service'
 
 @Component({
-  selector: 'app-chats-panel',
+  selector: 'tt-chats-panel',
   standalone: true,
   imports: [AsyncPipe, ChatBtnComponent, SvgIconComponent, ReactiveFormsModule],
   templateUrl: './chats-panel.component.html',

@@ -3,7 +3,7 @@ import { Profile } from '@tt/common-interfaces/profile'
 import { AvatarUrlPipe } from '@tt/shared'
 
 @Component({
-  selector: 'app-subscriber-card',
+  selector: 'tt-subscriber-card',
   standalone: true,
   imports: [AvatarUrlPipe],
   templateUrl: './subscriber-card.component.html',

@@ -4,7 +4,7 @@ import { TimeAgoPipe } from '@tt/shared'
 import { Comment } from '../../data/interfaces/post.interface'
 
 @Component({
-  selector: 'app-single-comment',
+  selector: 'tt-single-comment',
   standalone: true,
   imports: [CircleAvatarComponent, TimeAgoPipe],
   templateUrl: './single-comment.component.html',

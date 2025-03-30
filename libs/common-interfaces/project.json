@@ -2,7 +2,7 @@
   "name": "common-interfaces",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/common-interfaces/src",
-  "prefix": "lib",
+  "prefix": "tt",
   "projectType": "library",
   "tags": [],
   "targets": {

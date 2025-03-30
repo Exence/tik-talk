@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs'
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component'
 
 @Component({
-  selector: 'app-settings-page',
+  selector: 'tt-settings-page',
   standalone: true,
   imports: [ReactiveFormsModule, ProfileHeaderComponent, AvatarUploadComponent],
   templateUrl: './settings-page.component.html',

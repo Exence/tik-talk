@@ -11,6 +11,6 @@
 </div>
 <div class="chat-btns">
   @for (chat of filteredChats$ | async; track chat.id) {
-  <app-chat-btn [chat]="chat"></app-chat-btn>
+  <tt-chat-btn [chat]="chat"></tt-chat-btn>
   }
 </div>

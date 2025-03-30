@@ -13,7 +13,7 @@ import { CircleAvatarComponent, SvgIconComponent } from '@tt/common-ui'
 import { ProfileService } from '@tt/profiles'
 
 @Component({
-  selector: 'app-post-input',
+  selector: 'tt-post-input',
   standalone: true,
   imports: [FormsModule, CircleAvatarComponent, SvgIconComponent],
   templateUrl: './post-input.component.html',

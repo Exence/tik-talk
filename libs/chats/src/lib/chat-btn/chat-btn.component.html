@@ -1,6 +1,6 @@
 @if(chat(); as chat){
 <a class="btn chat-btn" [routerLink]="['/chats', chat.id]" routerLinkActive="active-chat-btn">
-  <app-circle-avatar class="size32" [avatarUrl]="chat.userFrom.avatarUrl"></app-circle-avatar>
+  <tt-circle-avatar class="size32" [avatarUrl]="chat.userFrom.avatarUrl"></tt-circle-avatar>
   <div class="chat-btn-content medium-text">
     <div class="chat-btn-content__header">
       <span>{{ chat.userFrom.firstName }} {{ chat.userFrom.lastName }}</span>

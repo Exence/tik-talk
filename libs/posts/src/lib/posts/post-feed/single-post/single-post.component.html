@@ -1,5 +1,5 @@
 @if (post(); as post) {
-<app-circle-avatar class="size32" [avatarUrl]="post.author.avatarUrl"></app-circle-avatar>
+<tt-circle-avatar class="size32" [avatarUrl]="post.author.avatarUrl"></tt-circle-avatar>
 
 <div class="post-feed">
   <div class="post">
@@ -25,13 +25,13 @@
   </div>
   <div class="comments">
     @for (comment of comments(); track comment.id) {
-    <app-single-comment [comment]="comment"></app-single-comment>
+    <tt-single-comment [comment]="comment"></tt-single-comment>
     }
   </div>
-  <app-post-input
+  <tt-post-input
     [isCommentInput]="true"
     palaceholder="Напишите комментарий"
     (send)="onCreateComment($event)"
-  ></app-post-input>
+  ></tt-post-input>
 </div>
 }

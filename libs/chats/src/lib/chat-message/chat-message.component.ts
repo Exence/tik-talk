@@ -15,7 +15,7 @@ import { AddTimezonePipe } from '@tt/shared'
 import { Message } from '../data/interfaces/chat.interface'
 
 @Component({
-  selector: 'app-chat-message',
+  selector: 'tt-chat-message',
   standalone: true,
   imports: [CircleAvatarComponent, DatePipe, AddTimezonePipe],
   templateUrl: './chat-message.component.html',

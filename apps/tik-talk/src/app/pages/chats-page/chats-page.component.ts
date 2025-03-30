@@ -4,7 +4,7 @@ import { ChatService, ChatsPanelComponent } from '@tt/chats'
 import { auditTime, firstValueFrom, fromEvent, Subject, takeUntil } from 'rxjs'
 
 @Component({
-  selector: 'app-chats-page',
+  selector: 'tt-chats-page',
   standalone: true,
   imports: [RouterOutlet, RouterLink, ChatsPanelComponent],
   templateUrl: './chats-page.component.html',

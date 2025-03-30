@@ -1,5 +1,5 @@
 @if(activeChat$ | async; as chat) {
-<app-chat-header [companion]="chat.companion"></app-chat-header>
+<tt-chat-header [companion]="chat.companion"></tt-chat-header>
 <div class="chat-area">
   <div class="chat-messages" #chatMessages>
     @if(messages().length) { @for (messageGroup of messages(); track messageGroup.date) {
@@ -8,21 +8,21 @@
     </div>
 
     @for (message of messageGroup.messages; track message.id;) {
-    <app-chat-message
+    <tt-chat-message
       [message]="message"
       [profile]="message.userFromId === me!.id ? me! : chat.companion!"
-    ></app-chat-message>
+    ></tt-chat-message>
     } } } @else {
     <h4 class="medium-text chat-messages__empty">
       В данном чате пока нет сообщений...Напишите первым!
     </h4>
     }
   </div>
-  <app-post-input
+  <tt-post-input
     class="chat-area__input"
     palaceholder="Напишите что-нибудь..."
     (send)="onSendMessage(chat.id, $event)"
-  ></app-post-input>
+  ></tt-post-input>
 </div>
 
 }

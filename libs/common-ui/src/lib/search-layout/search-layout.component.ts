@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
 
 @Component({
-  selector: 'app-search-layout',
+  selector: 'tt-search-layout',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './search-layout.component.html',

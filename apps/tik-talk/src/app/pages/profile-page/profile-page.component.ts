@@ -21,7 +21,7 @@ const appImports = [
 ]
 
 @Component({
-  selector: 'app-profile-page',
+  selector: 'tt-profile-page',
   standalone: true,
   imports: [...angularimports, ...appImports],
   templateUrl: './profile-page.component.html',

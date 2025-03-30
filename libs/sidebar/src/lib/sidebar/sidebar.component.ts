@@ -10,7 +10,7 @@ import { firstValueFrom, Subscription } from 'rxjs'
 import { SubscriberCardComponent } from '../subscriber-card/subscriber-card.component'
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'tt-sidebar',
   standalone: true,
   imports: [
     AsyncPipe,

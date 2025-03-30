@@ -4,7 +4,7 @@ import { Profile } from '@tt/common-interfaces/profile'
 import { AvatarUrlPipe } from '@tt/shared'
 
 @Component({
-  selector: 'app-profile-card',
+  selector: 'tt-profile-card',
   standalone: true,
   imports: [AvatarUrlPipe],
   templateUrl: './profile-card.component.html',

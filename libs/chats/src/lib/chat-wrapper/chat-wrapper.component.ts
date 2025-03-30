@@ -17,7 +17,7 @@ import { ChatMessageComponent } from '../chat-message/chat-message.component'
 import { ChatService } from '../data/services/chat.service'
 
 @Component({
-  selector: 'app-chat-wrapper',
+  selector: 'tt-chat-wrapper',
   standalone: true,
   imports: [
     ChatHeaderComponent,
