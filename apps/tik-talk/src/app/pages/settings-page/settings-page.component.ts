@@ -3,11 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ProfileHeaderComponent, ProfileService } from '@tt/profiles'
 import { firstValueFrom } from 'rxjs'
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component'
+import { StackInputComponent } from '@tt/common-ui'
 
 @Component({
   selector: 'tt-settings-page',
   standalone: true,
-  imports: [ReactiveFormsModule, ProfileHeaderComponent, AvatarUploadComponent],
+  imports: [AvatarUploadComponent, ReactiveFormsModule, ProfileHeaderComponent, StackInputComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

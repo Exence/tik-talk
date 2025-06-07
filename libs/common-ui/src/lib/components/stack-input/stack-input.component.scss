@@ -1,0 +1,20 @@
+.stack-input__wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--light-color);
+  padding: 10px 0;
+  width: 100%;
+}
+
+.stack-input__ghost-input {
+  border: none;
+  background: none;
+  outline: none;
+  font-family: "JetBrains Mono", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--light-color);
+}
