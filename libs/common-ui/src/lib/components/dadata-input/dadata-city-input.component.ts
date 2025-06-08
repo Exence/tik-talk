@@ -7,8 +7,8 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule
 } from '@angular/forms'
+import { DadataService } from '@tt/data-access'
 import { BehaviorSubject, debounceTime, switchMap, tap } from 'rxjs'
-import { DadataService } from '../../data/services/dadata.service'
 
 @Component({
   selector: 'tt-dadata-city-input',
