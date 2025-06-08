@@ -1,0 +1,34 @@
+.stack-input__wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--light-color);
+  padding: 10px 0;
+  width: 100%;
+}
+
+.stack-input__ghost-input {
+  border: none;
+  background: none;
+  outline: none;
+  font-family: "JetBrains Mono", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--light-color);
+}
+
+.stack-input__disabled {
+  color: var(--gray-color);
+
+  .skill-tag {
+    color: var(--gray-color);
+    border-color: var(--gray-color);
+  }
+
+  .btn-empty {
+    color: var(--gray-color);
+    cursor: default;
+  }
+}
