@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit, signal } from '@angular/core'
 import { CircleAvatarComponent, SvgIconComponent } from '@tt/common-ui'
+import { Comment, CommentCreateDto, Post, PostService } from '@tt/data-access'
 import { TimeAgoPipe } from '@tt/shared'
 import { firstValueFrom } from 'rxjs'
-import { Comment, CommentCreateDto, Post } from '../../data/interfaces/post.interface'
-import { PostService } from '../../data/services/post.service'
 import { PostInputComponent } from '../../ui/post-input/post-input.component'
 import { SingleCommentComponent } from '../single-comment/single-comment.component'
 

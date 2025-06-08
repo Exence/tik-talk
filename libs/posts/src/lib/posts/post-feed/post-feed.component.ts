@@ -7,8 +7,8 @@ import {
   Renderer2
 } from '@angular/core'
 import { Store } from '@ngrx/store'
+import { postActions, selectPosts } from '@tt/data-access'
 import { auditTime, fromEvent, Subject, takeUntil } from 'rxjs'
-import { postActions, selectPosts } from '../data'
 import { SinglePostComponent } from './single-post/single-post.component'
 
 @Component({
