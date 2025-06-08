@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core'
+import { AsyncPipe } from '@angular/common'
+import { ChangeDetectionStrategy, Component, forwardRef, inject, signal } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
   ControlValueAccessor,
@@ -6,13 +7,14 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule
 } from '@angular/forms'
-import { tap } from 'rxjs'
+import { BehaviorSubject, debounceTime, switchMap, tap } from 'rxjs'
+import { DadataService } from '../../data/services/dadata.service'
 
 @Component({
   selector: 'tt-dadata-city-input',
   templateUrl: './dadata-city-input.component.html',
   styleUrl: './dadata-city-input.component.scss',
-  imports: [ReactiveFormsModule],
+  imports: [AsyncPipe, ReactiveFormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -24,21 +26,31 @@ import { tap } from 'rxjs'
   standalone: true
 })
 export class DadataCityInputComponent implements ControlValueAccessor {
+  #dadataService = inject(DadataService)
+
   readonly disabled = signal(false)
+
+  readonly suggestions$ = new BehaviorSubject<string[]>([])
 
   readonly addresInput = new FormControl('')
 
   constructor() {
     this.addresInput.valueChanges
       .pipe(
-        takeUntilDestroyed(),
-        tap((city) => this.onChange(city ?? ''))
+        debounceTime(500),
+        tap((city) => this.onChange(city ?? '')),
+        switchMap((city) => this.#dadataService.getAddresSuggestions(city)),
+        tap((res) => {
+          const citiesWithTypes = res.map((address) => address.city_with_type).filter((c) => c)
+          this.suggestions$.next(Array.from(new Set(citiesWithTypes)))
+        }),
+        takeUntilDestroyed()
       )
       .subscribe()
   }
 
   writeValue(city: string | null) {
-    this.addresInput.setValue(city ?? '')
+    this.addresInput.setValue(city ?? '', { emitEvent: false })
   }
 
   registerOnChange(fn: any): void {
@@ -56,4 +68,10 @@ export class DadataCityInputComponent implements ControlValueAccessor {
   onChange(city: string) {}
 
   onTouched() {}
+
+  onSelectCity(city: string) {
+    this.suggestions$.next([])
+    this.addresInput.setValue(city, { emitEvent: false })
+    this.onChange(city)
+  }
 }

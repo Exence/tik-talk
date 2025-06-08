@@ -1,1 +1,9 @@
 <input type="text" class="tt-form-input" [formControl]="addresInput" />
+
+@if (suggestions$ | async; as suggestions) { @if (suggestions.length) {
+<div class="suggestions-dropdown">
+  @for (city of suggestions; track city) {
+  <button type="button" class="suggestion-btn" (click)="onSelectCity(city)">{{ city }}</button>
+  }
+</div>
+} }
