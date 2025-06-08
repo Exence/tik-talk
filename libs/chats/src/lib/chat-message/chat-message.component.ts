@@ -10,9 +10,9 @@ import {
 import { DatePipe } from '@angular/common'
 import { Profile } from '@tt/common-interfaces/profile'
 import { CircleAvatarComponent } from '@tt/common-ui/src'
+import { Message } from '@tt/data-access'
 import { ProfileService } from '@tt/profiles'
 import { AddTimezonePipe } from '@tt/shared'
-import { Message } from '../data/interfaces/chat.interface'
 
 @Component({
   selector: 'tt-chat-message',

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import { RouterLink, RouterLinkActive } from '@angular/router'
 import { CircleAvatarComponent } from '@tt/common-ui'
+import { MyChat } from '@tt/data-access'
 import { AddTimezonePipe, TimeOrDatePipe } from '@tt/shared'
-import { MyChat } from '../data/interfaces/chat.interface'
 
 @Component({
   selector: 'tt-chat-btn',

@@ -8,13 +8,13 @@ import {
   ViewChild
 } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
+import { ChatService } from '@tt/data-access'
 import { PostInputComponent } from '@tt/posts'
 import { ProfileService } from '@tt/profiles'
 import { RelativeDatePipe } from '@tt/shared'
 import { filter, firstValueFrom, of, switchMap, tap } from 'rxjs'
 import { ChatHeaderComponent } from '../chat-header/chat-header.component'
 import { ChatMessageComponent } from '../chat-message/chat-message.component'
-import { ChatService } from '../data/services/chat.service'
 
 @Component({
   selector: 'tt-chat-wrapper',

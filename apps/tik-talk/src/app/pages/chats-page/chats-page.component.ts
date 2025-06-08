@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, Renderer2 } from '@angular/core'
 import { RouterLink, RouterOutlet } from '@angular/router'
-import { ChatService, ChatsPanelComponent } from '@tt/chats'
+import { ChatsPanelComponent } from '@tt/chats'
+import { ChatService } from '@tt/data-access'
 import { auditTime, firstValueFrom, fromEvent, Subject, takeUntil } from 'rxjs'
 
 @Component({

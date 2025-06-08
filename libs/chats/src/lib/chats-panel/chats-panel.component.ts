@@ -2,9 +2,9 @@ import { AsyncPipe } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { FormControl, ReactiveFormsModule } from '@angular/forms'
 import { SvgIconComponent } from '@tt/common-ui'
+import { ChatService } from '@tt/data-access'
 import { map, startWith, switchMap } from 'rxjs'
 import { ChatBtnComponent } from '../chat-btn/chat-btn.component'
-import { ChatService } from '../data/services/chat.service'
 
 @Component({
   selector: 'tt-chats-panel',
