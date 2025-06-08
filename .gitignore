@@ -41,7 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-
+dadata-api-token.constant.ts
 
 .nx/cache
 .nx/workspace-data

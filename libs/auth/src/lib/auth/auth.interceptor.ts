@@ -8,6 +8,8 @@ const isRefreshing$ = new BehaviorSubject<boolean>(false)
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService)
 
+  if (req.url.includes('dadata.ru')) return next(req)
+
   if (!authService.accessToken || req.url.includes('refresh')) {
     return next(req)
   }
