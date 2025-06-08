@@ -1,32 +1,74 @@
-import { ChangeDetectionStrategy, Component, HostListener, signal } from '@angular/core'
-import { FormsModule } from '@angular/forms'
+import { AsyncPipe } from '@angular/common'
+import { ChangeDetectionStrategy, Component, forwardRef, HostListener, signal } from '@angular/core'
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { BehaviorSubject } from 'rxjs'
 import { SvgIconComponent } from '../../svg-icon/svg-icon.component'
 
 @Component({
   selector: 'tt-stack-input',
   templateUrl: './stack-input.component.html',
   styleUrl: './stack-input.component.scss',
-  imports: [FormsModule, SvgIconComponent],
+  imports: [AsyncPipe, FormsModule, SvgIconComponent],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => StackInputComponent)
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
-export class StackInputComponent {
-  readonly stack = signal<string[]>([])
+export class StackInputComponent implements ControlValueAccessor {
+  readonly disabled = signal(false)
+
+  readonly value$ = new BehaviorSubject<string[]>([])
   skillInputValue = ''
 
-  @HostListener('keydown.enter')
-  onEnterSkill() {
+  @HostListener('keydown.enter', ['$event'])
+  onEnterSkill(event: KeyboardEvent) {
+    event.stopPropagation()
+    event.preventDefault()
+
     if (!this.skillInputValue.length) return
 
-    const stack = this.stack()
-    stack.push(this.skillInputValue)
-    this.stack.set(stack)
+    this.value$.next([...this.value$.value, this.skillInputValue])
     this.skillInputValue = ''
+
+    this.onChange(this.value$.value)
   }
 
   onDeleteSkill(index: number) {
-    const stack = this.stack()
-    stack.splice(index, 1)
-    this.stack.set(stack)
+    if (this.disabled()) return
+
+    const value = this.value$.value
+    value.splice(index, 1)
+    this.value$.next(value)
+
+    this.onChange(this.value$.value)
   }
+
+  writeValue(val: string[]) {
+    if (!val) {
+      this.value$.next([])
+      return
+    }
+    this.value$.next(val)
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled.set(isDisabled)
+  }
+
+  onChange(val: string[] | null) {}
+
+  onTouched() {}
 }

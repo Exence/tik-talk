@@ -18,3 +18,17 @@
   line-height: 24px;
   color: var(--light-color);
 }
+
+.stack-input__disabled {
+  color: var(--gray-color);
+
+  .skill-tag {
+    color: var(--gray-color);
+    border-color: var(--gray-color);
+  }
+
+  .btn-empty {
+    color: var(--gray-color);
+    cursor: default;
+  }
+}

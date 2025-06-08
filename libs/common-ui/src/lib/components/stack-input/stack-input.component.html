@@ -1,10 +1,16 @@
-<div class="stack-input__wrapper">
-  @for (skill of stack(); track skill) {
+<div class="stack-input__wrapper" [class.stack-input__disabled]="disabled()">
+  @for (skill of value$ | async; track skill) {
   <div class="skill-tag">
     <button class="btn-empty" type="button" (click)="onDeleteSkill($index)">
       <svg icon="cross" class="svg12"></svg></button
     ><span>{{ skill }}</span>
   </div>
   }
-  <input class="stack-input__ghost-input" [(ngModel)]="skillInputValue" />
+  <input
+    type="text"
+    class="stack-input__ghost-input"
+    [(ngModel)]="skillInputValue"
+    [disabled]="disabled()"
+  />
 </div>
+ 

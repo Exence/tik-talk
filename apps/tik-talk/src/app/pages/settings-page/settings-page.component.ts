@@ -1,14 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewChild, effect, inject } from '@angular/core'
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
+import { StackInputComponent } from '@tt/common-ui'
 import { ProfileHeaderComponent, ProfileService } from '@tt/profiles'
 import { firstValueFrom } from 'rxjs'
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component'
-import { StackInputComponent } from '@tt/common-ui'
 
 @Component({
   selector: 'tt-settings-page',
   standalone: true,
-  imports: [AvatarUploadComponent, ReactiveFormsModule, ProfileHeaderComponent, StackInputComponent],
+  imports: [
+    AvatarUploadComponent,
+    ReactiveFormsModule,
+    ProfileHeaderComponent,
+    StackInputComponent
+  ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,7 +27,7 @@ export class SettingsPageComponent {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     username: [{ value: '', disabled: true }, Validators.required],
-    description: [''],
+    description: '',
     stack: ['']
   })
 
@@ -38,7 +43,6 @@ export class SettingsPageComponent {
     this.settingsForm.updateValueAndValidity()
 
     if (this.settingsForm.invalid) return
-    // TODO: add custom stack input
     //@ts-ignore
     firstValueFrom(this.profileService.patchProfile(this.settingsForm.value))
     this.onAvatarUpload(this.avatarUploader.avatar)
