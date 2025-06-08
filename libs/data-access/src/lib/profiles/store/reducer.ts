@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store'
-import { Profile } from '@tt/common-interfaces/profile'
+import { Profile } from '../interfaces'
 import { profileActions } from './actions'
 
 export interface ProfileState {
@@ -13,7 +13,7 @@ export interface Pagination {
   size: number
 }
 
-export const initialState: ProfileState = {
+const initialState: ProfileState = {
   profiles: [],
   profileFilters: {},
   pagination: {

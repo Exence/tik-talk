@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { inject, Injectable, signal } from '@angular/core'
 import { AuthService } from '@tt/auth'
-import { ProfileService } from '@tt/profiles'
 import { baseApiUrl } from '@tt/shared'
 import { DateTime } from 'luxon'
 import { firstValueFrom, map, tap } from 'rxjs'
+import { ProfileService } from '../../profiles/services/profile.service'
 import { ChatWSMessage, ChatWSNewMessage } from '../interfaces/chat-ws-message.interface'
 import { ChatWSConnectionParams } from '../interfaces/chat-ws-service.interface'
 import {

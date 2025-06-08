@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core'
 import { Router } from '@angular/router'
-import { Profile } from '@tt/common-interfaces/profile'
+import { Profile } from '@tt/data-access'
 import { AvatarUrlPipe } from '@tt/shared'
 
 @Component({

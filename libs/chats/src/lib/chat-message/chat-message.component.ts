@@ -8,10 +8,8 @@ import {
 } from '@angular/core'
 
 import { DatePipe } from '@angular/common'
-import { Profile } from '@tt/common-interfaces/profile'
 import { CircleAvatarComponent } from '@tt/common-ui/src'
-import { Message } from '@tt/data-access'
-import { ProfileService } from '@tt/profiles'
+import { Message, Profile, ProfileService } from '@tt/data-access'
 import { AddTimezonePipe } from '@tt/shared'
 
 @Component({

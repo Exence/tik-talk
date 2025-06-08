@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import { profileActions, selectSavedFilters } from '@tt/profiles'
+import { profileActions, selectSavedFilters } from '@tt/data-access'
 import { debounceTime, firstValueFrom, startWith } from 'rxjs'
 
 @Component({

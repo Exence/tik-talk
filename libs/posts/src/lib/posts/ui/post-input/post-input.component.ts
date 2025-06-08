@@ -10,7 +10,7 @@ import {
 } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { CircleAvatarComponent, SvgIconComponent } from '@tt/common-ui'
-import { ProfileService } from '@tt/profiles'
+import { ProfileService } from '@tt/data-access'
 
 @Component({
   selector: 'tt-post-input',

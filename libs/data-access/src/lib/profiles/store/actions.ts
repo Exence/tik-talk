@@ -1,5 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store'
-import { Profile } from '@tt/common-interfaces/profile'
+import { Profile } from '../interfaces/profile.interface'
 import { Pagination } from './reducer'
 
 export const profileActions = createActionGroup({

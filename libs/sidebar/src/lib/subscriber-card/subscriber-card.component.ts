@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
-import { Profile } from '@tt/common-interfaces/profile'
+import { Profile } from '@tt/data-access'
 import { AvatarUrlPipe } from '@tt/shared'
 
 @Component({

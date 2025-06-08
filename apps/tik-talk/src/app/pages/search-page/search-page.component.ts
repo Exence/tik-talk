@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { InfinityScrollTriggerComponent } from '@tt/common-ui'
-import { profileActions, ProfileCardComponent, selectFilteredProfiles } from '@tt/profiles'
+import { profileActions, selectFilteredProfiles } from '@tt/data-access'
+import { ProfileCardComponent } from '@tt/profiles'
 import { ProfileFiltersComponent } from './profile-filters/profile-filters.component'
 
 @Component({

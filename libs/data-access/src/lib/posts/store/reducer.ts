@@ -6,7 +6,7 @@ export interface PostState {
   posts: Post[]
 }
 
-export const initialState: PostState = {
+const initialState: PostState = {
   posts: []
 }
 
