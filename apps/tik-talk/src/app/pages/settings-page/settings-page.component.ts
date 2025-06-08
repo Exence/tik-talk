@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild, effect, inject } from '@angular/core'
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
-import { StackInputComponent } from '@tt/common-ui'
+import { DadataCityInputComponent, StackInputComponent } from '@tt/common-ui'
 import { ProfileHeaderComponent, ProfileService } from '@tt/profiles'
 import { firstValueFrom } from 'rxjs'
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component'
@@ -10,6 +10,7 @@ import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component'
   standalone: true,
   imports: [
     AvatarUploadComponent,
+    DadataCityInputComponent,
     ReactiveFormsModule,
     ProfileHeaderComponent,
     StackInputComponent
@@ -28,7 +29,8 @@ export class SettingsPageComponent {
     lastName: ['', Validators.required],
     username: [{ value: '', disabled: true }, Validators.required],
     description: '',
-    stack: ['']
+    stack: [''],
+    city: ''
   })
 
   constructor() {
